@@ -1,627 +1,601 @@
-# 🎵 MusicFlow - Complete Music Streaming Platform
+# 🎵 MusicFlow - Full-Stack Music Streaming Platform
 
-## 📑 Table of Contents
-1. [Live Deployment](#-live-deployment)
-2. [Project Overview](#-project-overview)
-3. [Tech Stack](#-complete-tech-stack)
-4. [Key Features](#-main-features-explained)
-5. [System Architecture](#-system-architecture)
-6. [Project Structure](#-complete-project-structure)
-7. [Database Schema](#-database-schema)
-8. [API Documentation](#-api-documentation)
-9. [State Management](#-state-management)
-10. [Security Status](#-security-status)
-11. [Mentor Q&A](#-mentor-qa--important-technical-questions)
-12. [Local Development Setup](#-local-development-setup-optional)
-13. [Recent Changes & Improvements](#-recent-changes--improvements)
-14. [Common Issues & Solutions](#-common-issues--solutions)
-15. [Project Stats](#-project-statistics)
+A modern, feature-rich music streaming web application built with React, Node.js, MongoDB, and Cloudinary. MusicFlow provides a complete music streaming experience with user authentication, personalized playlists, a custom audio player, and an admin panel for content management.
 
 ---
 
 ## 🌐 Live Deployment
 
-### ✅ **The website is LIVE and fully functional!**
-
-**🚀 Access the Application:**
+**The application is live and fully operational!**
 
 | Service | URL | Description |
 |---------|-----|-------------|
 | 🎵 **User App** | [https://music-flow-six.vercel.app/](https://music-flow-six.vercel.app/) | Main music streaming application |
 | ⚙️ **Admin Panel** | [https://music-flow-91y6.vercel.app/](https://music-flow-91y6.vercel.app/) | Content management dashboard |
-| 🔧 **Backend API** | Hosted on Render | RESTful API server |
 
 **Deployment Stack:**
-- **Frontend & Admin:** Vercel (Edge Network)
-- **Backend:** Render (Cloud Platform)
-- **Database:** MongoDB Atlas (Cloud Database)
-- **Media Storage:** Cloudinary (CDN)
-
-**Status:** 🟢 All systems operational
+- Frontend & Admin: **Vercel** (Edge Network)
+- Backend: **Render** (Cloud Platform)
+- Database: **MongoDB Atlas** (Cloud Database)
+- Media Storage: **Cloudinary** (CDN)
 
 ---
 
-## 🔒 Security Status
+## 📋 Table of Contents
 
-### ✅ **PRODUCTION READY** (All Critical Issues Fixed - Oct 24, 2025)
-
-**8 Critical Security Vulnerabilities Fixed:**
-
-1. ✅ **JWT Secret Vulnerability** - Removed hardcoded `'your-secret-key'` fallback
-2. ✅ **Credential Protection** - Created `Backend/.gitignore` to prevent .env exposure
-3. ✅ **Admin Route Security** - Added authentication to song/album add/remove endpoints
-4. ✅ **CORS Configuration** - Restricted to specific frontend and admin URLs
-5. ✅ **Environment Documentation** - Created `.env.example` files for all 3 apps
-6. ✅ **Source Code Protection** - Disabled production sourcemaps in Vite config
-7. ✅ **API Configuration** - Enhanced error handling for missing environment variables
-8. ✅ **Build Verification** - All builds successful and tested
-
-**Security Features:**
-- JWT authentication with bcrypt password hashing (salt rounds: 12)
-- Protected routes with authentication middleware
-- User data isolation (playlists, likes, recently played per user)
-- CORS configured with allowed origins
-- Environment variables properly managed
-- Secure password storage (never plain text)
+1. [Project Overview](#-project-overview)
+2. [Key Features](#-key-features)
+3. [Tech Stack](#-tech-stack)
+4. [Project Structure](#-project-structure)
+5. [System Architecture](#-system-architecture)
+6. [Installation & Setup](#-installation--setup)
+7. [Database Schema](#-database-schema)
+8. [API Endpoints](#-api-endpoints)
+9. [State Management](#-state-management)
+10. [Security Features](#-security-features)
+11. [Mentor Q&A](#-mentor-qa)
+12. [Contributing](#-contributing)
+13. [License](#-license)
 
 ---
 
-## 📋 Project Overview
+## 🎯 Project Overview
 
-**MusicFlow** is a full-stack music streaming application built from scratch using React and Node.js.
+**MusicFlow** is a full-stack music streaming platform similar to Spotify, built entirely from scratch without following any tutorials. The application demonstrates modern web development practices, including user authentication, file uploads, real-time updates, and responsive design.
 
-### What This Project Does:
-- **For Users**: Stream music, create playlists, like songs, track listening history
-- **For Admins**: Upload and manage songs/albums through dedicated admin panel
-- **For Developers**: Complete example of modern full-stack web architecture
+### What This Project Does
 
-### How It Works:
-1. **Backend** (Node.js + Express) - Handles data, authentication, API requests
-2. **Frontend** (React + Vite) - User interface for music streaming
-3. **Admin Panel** (React + Vite) - Content management interface
-4. **Database** (MongoDB) - Stores users, songs, albums, playlists
-5. **Cloud Storage** (Cloudinary) - Hosts audio files and images
+- **For Users:** Stream music, create personalized playlists, like songs, track listening history, search content, and switch between light/dark themes
+- **For Admins:** Upload and manage songs/albums through a dedicated admin dashboard
+- **For Developers:** Serves as a complete reference for building production-ready full-stack applications
+
+### Why This Project Exists
+
+This project was built to demonstrate:
+1. End-to-end full-stack development skills
+2. Integration of modern web technologies
+3. Implementation of authentication and authorization
+4. File upload and cloud storage management
+5. Responsive, user-friendly UI/UX design
 
 ---
 
-## 🛠️ Complete Tech Stack
+## ✨ Key Features
+
+### 🎧 Music Player
+- **Full playback controls:** Play, pause, next, previous, seek, volume control
+- **Shuffle & repeat modes:** Random playback and loop functionality
+- **Progress tracking:** Real-time audio progress with visual feedback
+- **Auto-advance:** Automatically plays next song in queue
+- **Persistent playback:** Music continues when navigating pages
+
+### 👤 User Management
+- **Authentication:** JWT-based secure login/signup system
+- **User profiles:** Personal accounts with customizable settings
+- **Data isolation:** Each user has separate playlists, liked songs, and history
+- **Password security:** Bcrypt hashing with salt rounds (12)
+- **Session persistence:** Stay logged in across browser sessions
+
+### 📚 Content Management
+- **Playlists:** Create, edit, delete, and organize custom playlists
+- **Liked Songs:** Heart songs to save to favorites
+- **Recently Played:** Automatic tracking with accurate timestamps (5m ago, 2h ago)
+- **Search:** Real-time search across songs, albums, and playlists
+- **Albums:** Browse music organized by albums
+
+### ⚙️ Admin Features
+- **Song Upload:** Upload audio files with metadata and cover images
+- **Album Management:** Create and manage album collections
+- **Content Moderation:** Edit or remove songs and albums
+- **Cloud Integration:** Automatic upload to Cloudinary CDN
+
+### 🎨 User Experience
+- **Responsive Design:** Works seamlessly on desktop, tablet, and mobile
+- **Dark/Light Theme:** Toggle between themes with system preference detection
+- **Optimistic Updates:** Instant UI feedback for user actions
+- **Loading States:** Skeleton loaders and progress indicators
+- **Error Handling:** User-friendly error messages and toast notifications
+
+---
+
+## 🛠️ Tech Stack
+
+### Frontend
+| Technology | Version | Purpose |
+|------------|---------|---------|
+| React | 19.1.1 | UI library for building components |
+| Vite | 7.1.7 | Fast build tool and dev server |
+| React Router | 7.9.4 | Client-side routing and navigation |
+| TailwindCSS | 3.4.14 | Utility-first CSS framework |
+| Axios | 1.12.2 | HTTP client for API requests |
+| Context API | Built-in | State management solution |
 
 ### Backend
-| Technology | Purpose | Version |
+| Technology | Version | Purpose |
 |------------|---------|---------|
-| Node.js | JavaScript runtime | Latest |
-| Express.js | Web framework | v5.1.0 |
-| MongoDB | NoSQL database | v8.19.1 |
-| Mongoose | MongoDB ODM | v8.19.1 |
-| JWT | Authentication | v9.0.2 |
-| bcryptjs | Password hashing | v2.4.3 |
-| Multer | File uploads | v2.0.2 |
-| Cloudinary | Cloud storage | v2.7.0 |
-| CORS | Cross-origin requests | v2.8.5 |
+| Node.js | Latest | JavaScript runtime environment |
+| Express.js | 5.1.0 | Web framework for building APIs |
+| MongoDB | 8.19.1 | NoSQL database for data storage |
+| Mongoose | 8.19.1 | MongoDB object modeling (ODM) |
+| JWT | 9.0.2 | JSON Web Tokens for authentication |
+| bcryptjs | 2.4.3 | Password hashing and encryption |
+| Multer | 2.0.2 | Middleware for file uploads |
+| Cloudinary | 2.7.0 | Cloud storage for media files |
+| CORS | 2.8.5 | Cross-Origin Resource Sharing |
 
-### Frontend & Admin
-| Technology | Purpose | Version |
-|------------|---------|---------|
-| React | UI library | v19.1.1 |
-| Vite | Build tool | v7.1.7 |
-| React Router | Client routing | v7.9.4 |
-| Axios | HTTP client | v1.12.2 |
-| TailwindCSS | CSS framework | v3.4.14 |
-| Context API | State management | Built-in |
+### Development Tools
+- **ESLint:** Code linting and quality checking
+- **PostCSS:** CSS processing and transformation
+- **Nodemon:** Auto-restart server during development
 
 ---
 
-## 📁 Complete Project Structure
+## 📁 Project Structure
 
 ```
-MusicWebApplication/
-├── Backend/                          # Node.js Server (Port 4000)
+MusicFlow/
+│
+├── Backend/                          # Node.js + Express API Server
 │   ├── src/
 │   │   ├── config/
-│   │   │   ├── mongodb.js           # Database connection
-│   │   │   └── cloudinary.js        # Cloud storage config
+│   │   │   ├── mongodb.js           # Database connection setup
+│   │   │   └── cloudinary.js        # Cloud storage configuration
 │   │   ├── controllers/
-│   │   │   ├── authController.js    # Login/Register logic
-│   │   │   ├── songController.js    # Song CRUD
-│   │   │   ├── albumController.js   # Album CRUD
-│   │   │   └── playlistController.js # Playlist management
+│   │   │   ├── authController.js    # User authentication logic (login, signup)
+│   │   │   ├── songController.js    # Song CRUD operations + like/unlike
+│   │   │   ├── albumController.js   # Album management operations
+│   │   │   └── playlistController.js # Playlist CRUD operations
 │   │   ├── middleware/
-│   │   │   ├── authMiddleware.js    # JWT verification
-│   │   │   └── multer.js            # File upload handler
+│   │   │   ├── authMiddleware.js    # JWT token verification
+│   │   │   └── multer.js            # File upload handling
 │   │   ├── models/
-│   │   │   ├── userModel.js         # User schema
+│   │   │   ├── userModel.js         # User schema with validation
 │   │   │   ├── songModel.js         # Song schema
 │   │   │   ├── albumModel.js        # Album schema
 │   │   │   └── playlistModel.js     # Playlist schema
 │   │   └── routes/
-│   │       ├── authRoutes.js        # /api/auth/*
-│   │       ├── songRouter.js        # /api/song/*
-│   │       ├── albumRouter.js       # /api/album/*
-│   │       └── playlistRouter.js    # /api/playlist/*
-│   ├── server.js                    # Main entry point
-│   ├── .env.example                 # Environment template
-│   ├── .gitignore                   # Git ignore rules
-│   └── package.json                 # Dependencies
+│   │       ├── authRoutes.js        # Authentication endpoints
+│   │       ├── songRouter.js        # Song-related endpoints
+│   │       ├── albumRouter.js       # Album-related endpoints
+│   │       └── playlistRouter.js    # Playlist-related endpoints
+│   ├── server.js                    # Main server entry point
+│   ├── package.json                 # Backend dependencies
+│   └── .env                         # Environment variables (not in Git)
 │
-├── Music Web Application/           # React User App (Port 3000)
+├── Music Web Application/           # React User Frontend
 │   ├── src/
 │   │   ├── components/
-│   │   │   ├── Player.jsx           # Music player UI
-│   │   │   ├── Sidebar.jsx          # Left navigation
-│   │   │   ├── Navbar.jsx           # Top bar
-│   │   │   ├── DisplayHome.jsx      # Home page
-│   │   │   ├── LikedSongs.jsx       # Favorites page
-│   │   │   ├── RecentlyPlayed.jsx   # History page
-│   │   │   └── SearchPage.jsx       # Search page
+│   │   │   ├── Player.jsx           # Music player with controls
+│   │   │   ├── Sidebar.jsx          # Left navigation menu
+│   │   │   ├── Navbar.jsx           # Top navigation bar
+│   │   │   ├── DisplayHome.jsx      # Home page with featured content
+│   │   │   ├── DisplayAlbum.jsx     # Album detail view
+│   │   │   ├── DisplayPlaylist.jsx  # Playlist detail view
+│   │   │   ├── LikedSongs.jsx       # User's liked songs page
+│   │   │   ├── RecentlyPlayed.jsx   # Recently played tracks
+│   │   │   ├── SearchPage.jsx       # Search functionality
+│   │   │   ├── SongItem.jsx         # Individual song component
+│   │   │   ├── AlbumItem.jsx        # Individual album component
+│   │   │   └── CreatePlaylistModal.jsx # Create playlist modal
 │   │   ├── context/
-│   │   │   ├── AuthContext.jsx      # Auth state management
-│   │   │   ├── PlayerContext.jsx    # Player state (1200+ lines)
-│   │   │   └── ThemeContext.jsx     # Theme & notifications
+│   │   │   ├── AuthContext.jsx      # User authentication state
+│   │   │   ├── PlayerContext.jsx    # Music player state (1200+ lines)
+│   │   │   └── ThemeContext.jsx     # Theme and notifications
 │   │   ├── pages/
 │   │   │   ├── Login.jsx            # Login page
-│   │   │   └── Signup.jsx           # Signup page
-│   │   ├── App.jsx                  # Main app component
-│   │   └── main.jsx                 # Entry point
-│   ├── .env.example                 # Environment template
-│   └── package.json                 # Dependencies
+│   │   │   └── Signup.jsx           # Signup/registration page
+│   │   ├── App.jsx                  # Main app component with routing
+│   │   ├── main.jsx                 # React app entry point
+│   │   └── index.css                # Global styles and Tailwind imports
+│   ├── package.json                 # Frontend dependencies
+│   └── vite.config.js               # Vite build configuration
 │
-└── admin/                           # Admin Panel (Port 5173)
+└── admin/                           # React Admin Panel
     ├── src/
+    │   ├── components/
+    │   │   ├── Navbar.jsx           # Admin navigation
+    │   │   └── SideBar.jsx          # Admin sidebar
     │   ├── pages/
-    │   │   ├── AddSong.jsx          # Upload songs
-    │   │   ├── AddAlbum.jsx         # Create albums
-    │   │   ├── ListSong.jsx         # Manage songs
-    │   │   └── ListAlbum.jsx        # Manage albums
-    │   └── App.jsx                  # Admin app component
-    ├── .env.example                 # Environment template
-    └── package.json                 # Dependencies
+    │   │   ├── AddSong.jsx          # Upload new songs with metadata
+    │   │   ├── AddAlbum.jsx         # Create new albums
+    │   │   ├── ListSong.jsx         # View and manage all songs
+    │   │   └── ListAlbum.jsx        # View and manage all albums
+    │   ├── App.jsx                  # Admin app component
+    │   └── main.jsx                 # Admin entry point
+    ├── package.json                 # Admin dependencies
+    └── vite.config.js               # Admin build configuration
 ```
 
----
-
-## 💻 Local Development Setup (Optional)
-
-> **Note:** The application is already deployed and live at the URLs above. This section is only for developers who want to run the project locally for development or testing purposes.
-
-### Quick Local Setup
-
-**Prerequisites:**
-- Node.js (v16+)
-- MongoDB (local or Atlas)
-- Cloudinary account
-
-**1. Clone & Install:**
-```bash
-git clone <repository-url>
-cd MusicWebApplication
-
-# Backend
-cd Backend && npm install
-
-# Frontend
-cd "../Music Web Application" && npm install
-
-# Admin
-cd ../admin && npm install
-```
-
-**2. Environment Variables:**
-
-Create `.env` files in each directory:
-
-```env
-# Backend/.env
-PORT=4000
-MONGODB_URI=your_mongodb_uri
-JWT_SECRET=your_generated_secret
-CLOUDINARY_CLOUD_NAME=your_cloud_name
-CLOUDINARY_API_KEY=your_api_key
-CLOUDINARY_API_SECRET=your_api_secret
-
-# Music Web Application/.env
-VITE_API_URL=http://localhost:4000
-
-# admin/.env
-VITE_API_URL=http://localhost:4000
-```
-
-**3. Run All Services:**
-```bash
-# Terminal 1 - Backend
-cd Backend && npm start
-
-# Terminal 2 - Frontend
-cd "Music Web Application" && npm run dev
-
-# Terminal 3 - Admin
-cd admin && npm run dev
-```
-
-**Local URLs:**
-- Backend: `http://localhost:4000`
-- Frontend: `http://localhost:3000`
-- Admin: `http://localhost:5173`
-
----
-
-## 🔒 Security Fixes Applied
-
-### 1. JWT Secret Vulnerability (CRITICAL)
-
-**Issue:** Hardcoded fallback `'your-secret-key'` allowed token forgery
-
-**Fixed Files:**
-- `Backend/src/controllers/authController.js`
-- `Backend/src/middleware/authMiddleware.js`
-
-**Before (VULNERABLE):**
-```javascript
-jwt.verify(token, process.env.JWT_SECRET || 'your-secret-key')
-```
-
-**After (SECURE):**
-```javascript
-const JWT_SECRET = process.env.JWT_SECRET;
-if (!JWT_SECRET) {
-  throw new Error('FATAL: JWT_SECRET environment variable is not set');
-}
-jwt.verify(token, JWT_SECRET)
-```
-
-### 2. Missing .gitignore (CRITICAL)
-
-**Issue:** `.env` file could be committed to version control
-
-**Fixed:** Created `Backend/.gitignore` with:
-```
-.env
-.env.*
-!.env.example
-node_modules/
-*.log
-dist/
-```
-
-### 3. Unprotected Admin Routes (CRITICAL)
-
-**Issue:** Anyone could add/delete songs and albums
-
-**Fixed Files:**
-- `Backend/src/routes/songRouter.js`
-- `Backend/src/routes/albumRouter.js`
-
-**Before:**
-```javascript
-songRouter.post("/add", upload.fields([...]), addSong);
-albumRouter.post("/remove", removeAlbum);
-```
-
-**After:**
-```javascript
-songRouter.post("/add", authenticateToken, upload.fields([...]), addSong);
-albumRouter.post("/remove", authenticateToken, removeAlbum);
-```
-
-### 4. Open CORS Policy (HIGH)
-
-**Issue:** Any website could make requests to your API
-
-**Fixed:** `Backend/server.js`
-```javascript
-const allowedOrigins = [
-  process.env.FRONTEND_URL || 'http://localhost:3000',
-  process.env.ADMIN_URL || 'http://localhost:5173',
-];
-
-app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true
-}));
-```
-
-### 5. Missing Environment Documentation
-
-**Fixed:** Created `.env.example` files for all 3 apps with all required variables documented
-
-### 6. Production Sourcemaps Enabled
-
-**Issue:** Source code exposed in production builds
-
-**Fixed:** `Music Web Application/vite.config.js`
-```javascript
-build: {
-  sourcemap: false  // Disabled for security
-}
-```
-
----
-
-## 🎯 Main Features Explained
-
-### 1. User Authentication (JWT)
-
-**How it works:**
-1. User enters email/password
-2. Backend validates credentials with bcrypt
-3. Backend generates JWT token with user ID
-4. Frontend stores token in localStorage
-5. Token sent with every API request in Authorization header
-6. Backend verifies token before accessing protected routes
-
-**Files:**
-- `Backend/src/controllers/authController.js` - Login/register logic
-- `Backend/src/middleware/authMiddleware.js` - Token verification
-- `Music Web Application/src/context/AuthContext.jsx` - Auth state management
-
-### 2. Music Player
-
-**Features:**
-- Play/pause, next/previous, seek bar
-- Volume control (0-100%)
-- Shuffle mode, repeat mode
-- Auto-advance to next song
-
-**How it works:**
-- Uses HTML5 `<audio>` element controlled via React refs
-- Audio src set to Cloudinary URL
-- Event listeners: `timeupdate`, `ended`, `loadedmetadata`
-- State managed in PlayerContext
-
-**Files:**
-- `Music Web Application/src/context/PlayerContext.jsx` (1200+ lines)
-- `Music Web Application/src/components/Player.jsx` - UI controls
-
-### 3. Playlist Management
-
-**Features:**
-- Create, edit, delete playlists
-- Add/remove songs
-- User-specific (each user has their own)
-
-**How it works:**
-1. User creates playlist → POST `/api/playlist/create`
-2. Backend stores with user ID from JWT
-3. Only owner can modify their playlists
-4. Playlists reference songs by ID
-
-**Files:**
-- `Backend/src/controllers/playlistController.js`
-- `Music Web Application/src/components/CreatePlaylistModal.jsx`
-- `Music Web Application/src/components/DisplayPlaylist.jsx`
-
-### 4. Liked Songs
-
-**Features:**
-- Like/unlike any song
-- Optimistic UI updates (instant feedback)
-- Persistent across sessions
-
-**How it works:**
-1. User clicks heart → UI updates immediately
-2. Request sent to `/api/song/like`
-3. Backend adds song ID to user.likedSongs array
-4. If request fails, UI reverts
-
-**Files:**
-- `Backend/src/controllers/songController.js` - `likeSong()`, `unlikeSong()`
-- `Music Web Application/src/context/PlayerContext.jsx` - `toggleLikeSong()`
-
-### 5. Recently Played
-
-**Features:**
-- Auto-tracks last 5 songs played
-- Shows relative timestamps ("5m ago", "2h ago")
-- Sorted by most recent first
-
-**How it works:**
-1. When song plays → POST `/api/song/recently-played`
-2. Backend adds entry with current timestamp
-3. Keeps only last 5, removes duplicates
-4. Frontend calculates relative time on render
-
-### 6. Search
-
-**Features:**
-- Real-time search (updates as you type)
-- Search songs, albums, playlists
-- Accent-insensitive, case-insensitive
-
-**How it works:**
-- All data loaded to frontend once
-- Search done client-side (fast filtering)
-- Debounced 220ms to avoid excessive filtering
-- Uses Unicode normalization for accents
-
-### 7. File Upload (Admin)
-
-**How it works:**
-1. Admin selects audio file + cover image
-2. Multer saves to temp folder on server
-3. Files uploaded to Cloudinary via API
-4. Cloudinary returns secure URLs
-5. URLs saved to MongoDB
-6. Temp files deleted from server
-
-**Files:**
-- `Backend/src/middleware/multer.js` - File upload config
-- `Backend/src/controllers/songController.js` - Upload logic
-- `admin/src/pages/AddSong.jsx` - Upload UI
-
-### 8. Theme Switching
-
-**Features:**
-- Dark/light mode toggle
-- Saves preference to localStorage
-- Auto-detects system preference
-
-**How it works:**
-- On load: Check localStorage → system preference
-- Toggle adds/removes `dark` class on `<html>`
-- TailwindCSS `dark:` classes apply automatically
+### Key Files Explained
+
+**Backend:**
+- `server.js` - Initializes Express app, connects to MongoDB and Cloudinary, sets up middleware and routes
+- `authController.js` - Handles user registration, login, token generation, and password validation
+- `authMiddleware.js` - Verifies JWT tokens on protected routes, extracts user info from tokens
+- `multer.js` - Configures file upload handling (audio files and images)
+- `userModel.js` - Defines user schema with password hashing hooks and validation
+
+**Frontend:**
+- `PlayerContext.jsx` - Manages all music player state (current song, play/pause, volume, playlist queue)
+- `AuthContext.jsx` - Manages user authentication state and provides login/logout functions
+- `Player.jsx` - UI component for music player controls (visible at bottom of app)
+- `DisplayHome.jsx` - Main homepage showing recently played, liked songs, and featured albums
 
 ---
 
 ## 🏗️ System Architecture
 
-### Request Flow Diagram
+### Application Flow
 
 ```
-User → Frontend (React) → Backend (Express) → Database (MongoDB)
-                              ↓
-                         Cloud Storage (Cloudinary)
+┌─────────────┐         ┌─────────────┐         ┌──────────────┐
+│             │  HTTP   │             │  Query  │              │
+│   React     │◄───────►│  Express    │◄───────►│   MongoDB    │
+│  Frontend   │  Req/Res│   Backend   │         │   Database   │
+│             │         │             │         │              │
+└─────────────┘         └─────────────┘         └──────────────┘
+                                │
+                                │ Upload/Fetch
+                                ▼
+                        ┌──────────────┐
+                        │              │
+                        │  Cloudinary  │
+                        │     CDN      │
+                        │              │
+                        └──────────────┘
 ```
 
 ### Authentication Flow
 
-```
-1. User enters email/password
-2. Frontend → POST /api/auth/login
-3. Backend validates credentials
-4. Backend generates JWT token
-5. Frontend stores token in localStorage
-6. Token sent with all future requests
-7. Backend verifies token for protected routes
-```
+1. **User Registration/Login**
+   - User submits credentials to backend
+   - Backend validates input and checks database
+   - Password hashed with bcrypt (salt rounds: 12)
+   - JWT token generated with user ID as payload
+   - Token sent to frontend and stored in localStorage
+
+2. **Protected Route Access**
+   - Frontend sends JWT token in Authorization header
+   - Backend middleware (`authenticateToken`) verifies token
+   - Token decoded to extract user ID
+   - User ID used to fetch/update user-specific data
+   - Response sent back to frontend
 
 ### Music Playback Flow
 
-```
-1. User clicks play button
-2. playWithId(songId) called
-3. Find song in songsData array
-4. Set audioRef.src = song.file (Cloudinary URL)
-5. Call audioRef.play()
-6. Update playStatus = true
-7. POST /api/song/recently-played
-8. Backend saves to user.recentlyPlayed
-9. UI shows playing song with controls
-```
+1. User clicks play button on a song
+2. `playWithId()` function called in PlayerContext
+3. Song object retrieved from `songsData` array
+4. Audio element's `src` set to Cloudinary URL
+5. `audioRef.current.play()` triggers playback
+6. Event listeners update UI (time, progress bar)
+7. POST request sent to `/api/song/recently-played`
+8. Backend adds entry to user's `recentlyPlayed` array
+9. UI displays "Now Playing" information
 
 ### File Upload Flow
 
-```
-1. Admin selects files
-2. FormData sent to /api/song/add
-3. Multer saves to temp folder
-4. Upload to Cloudinary (audio + image)
-5. Cloudinary returns URLs
-6. Save metadata + URLs to MongoDB
-7. Delete temp files
-8. Return success response
-```
+1. Admin selects audio file and cover image
+2. Files packaged in FormData object
+3. POST request to `/api/song/add` with FormData
+4. Multer middleware saves files to temp directory
+5. Files uploaded to Cloudinary via API
+6. Cloudinary returns secure URLs
+7. Song metadata + URLs saved to MongoDB
+8. Temp files deleted from server
+9. Success response sent to admin panel
 
 ---
 
-## 📡 API Documentation
+## 💻 Installation & Setup
 
-### Authentication Routes (`/api/auth/*`)
+### Prerequisites
 
-| Endpoint | Method | Auth | Purpose |
-|----------|--------|------|---------|
-| `/api/auth/register` | POST | No | Create new user |
-| `/api/auth/login` | POST | No | User login, returns JWT |
-| `/api/auth/profile` | GET | Yes | Get current user info |
-| `/api/auth/profile` | PUT | Yes | Update user profile |
-| `/api/auth/change-password` | PUT | Yes | Change password |
-| `/api/auth/account` | DELETE | Yes | Deactivate account |
+Before you begin, ensure you have the following installed:
+- **Node.js** (v16 or higher) - [Download](https://nodejs.org/)
+- **MongoDB** (local installation or MongoDB Atlas account)
+- **Cloudinary account** - [Sign up](https://cloudinary.com/) (free tier available)
+- **Git** - For cloning the repository
 
-### Song Routes (`/api/song/*`)
+### Step 1: Clone the Repository
 
-| Endpoint | Method | Auth | Purpose |
-|----------|--------|------|---------|
-| `/api/song/list` | GET | No | Get all songs |
-| `/api/song/add` | POST | Yes | Add song (admin) |
-| `/api/song/remove` | POST | Yes | Delete song (admin) |
-| `/api/song/like` | POST | Yes | Like a song |
-| `/api/song/unlike` | POST | Yes | Unlike a song |
-| `/api/song/liked` | GET | Yes | Get user's liked songs |
-| `/api/song/recently-played` | POST | Yes | Add to history |
-| `/api/song/recently-played` | GET | Yes | Get history |
+```bash
+git clone <your-repository-url>
+cd MusicFlow
+```
 
-### Album Routes (`/api/album/*`)
+### Step 2: Backend Setup
 
-| Endpoint | Method | Auth | Purpose |
-|----------|--------|------|---------|
-| `/api/album/list` | GET | No | Get all albums |
-| `/api/album/add` | POST | Yes | Add album (admin) |
-| `/api/album/remove` | POST | Yes | Delete album (admin) |
+```bash
+# Navigate to backend directory
+cd Backend
 
-### Playlist Routes (`/api/playlist/*`)
+# Install dependencies
+npm install
 
-| Endpoint | Method | Auth | Purpose |
-|----------|--------|------|---------|
-| `/api/playlist/list` | GET | Yes | Get user's playlists |
-| `/api/playlist/:id` | GET | Yes | Get specific playlist |
-| `/api/playlist/create` | POST | Yes | Create new playlist |
-| `/api/playlist/add-song` | POST | Yes | Add song to playlist |
-| `/api/playlist/remove-song` | POST | Yes | Remove song |
-| `/api/playlist/delete/:id` | DELETE | Yes | Delete playlist |
+# Create environment file
+touch .env
+```
+
+**Edit `Backend/.env` and add:**
+
+```env
+# Server Configuration
+PORT=4000
+NODE_ENV=development
+
+# Database Configuration
+MONGODB_URI=mongodb://localhost:27017/musicflow
+# For MongoDB Atlas: mongodb+srv://username:password@cluster.mongodb.net/musicflow
+
+# Authentication Secret (Generate a strong secret)
+JWT_SECRET=your_super_secret_jwt_key_minimum_32_characters
+
+# Cloudinary Configuration
+CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
+CLOUDINARY_API_KEY=your_cloudinary_api_key
+CLOUDINARY_API_SECRET=your_cloudinary_api_secret
+
+# Frontend URLs (for CORS)
+FRONTEND_URL=http://localhost:3000
+ADMIN_URL=http://localhost:5173
+```
+
+**Generate JWT_SECRET:**
+```bash
+node -e "console.log(require('crypto').randomBytes(64).toString('hex'))"
+```
+
+**Start Backend Server:**
+```bash
+npm start
+# Server runs on http://localhost:4000
+```
+
+### Step 3: Frontend Setup
+
+```bash
+# Navigate to frontend directory
+cd "../Music Web Application"
+
+# Install dependencies
+npm install
+
+# Create environment file
+touch .env
+```
+
+**Edit `Music Web Application/.env` and add:**
+
+```env
+VITE_API_URL=http://localhost:4000
+```
+
+**Start Frontend Development Server:**
+```bash
+npm run dev
+# App runs on http://localhost:3000
+```
+
+### Step 4: Admin Panel Setup
+
+```bash
+# Navigate to admin directory
+cd ../admin
+
+# Install dependencies
+npm install
+
+# Create environment file
+touch .env
+```
+
+**Edit `admin/.env` and add:**
+
+```env
+VITE_API_URL=http://localhost:4000
+```
+
+**Start Admin Development Server:**
+```bash
+npm run dev
+# Admin runs on http://localhost:5173
+```
+
+### Step 5: Verify Installation
+
+**Test Backend:**
+```bash
+# Health check endpoint
+curl http://localhost:4000/api/health
+# Should return: {"status": "OK", "database": "Connected"}
+```
+
+**Test Frontend:**
+- Open browser to `http://localhost:3000`
+- You should see the MusicFlow homepage
+
+**Test Admin:**
+- Open browser to `http://localhost:5173`
+- You should see the admin dashboard
 
 ---
 
 ## 🗄️ Database Schema
 
 ### User Model
+
 ```javascript
 {
-  _id: ObjectId,
-  name: String,
-  email: String (unique, required),
-  password: String (hashed with bcrypt),
-  avatar: String (optional),
-  likedSongs: [ObjectId] (references Songs),
-  recentlyPlayed: [{
-    song: ObjectId (reference to Song),
-    playedAt: Date
+  _id: ObjectId,                           // Unique user identifier
+  name: String,                            // User's full name (2-50 chars)
+  email: String,                           // Unique email (validated format)
+  password: String,                        // Bcrypt hashed password (not selected by default)
+  avatar: String,                          // Profile picture URL (optional)
+  likedSongs: [ObjectId],                  // Array of liked song IDs
+  recentlyPlayed: [{                       // Recently played songs
+    song: ObjectId,                        // Reference to Song
+    playedAt: Date                         // Timestamp of play
   }],
-  playlists: [ObjectId] (references Playlists),
-  isActive: Boolean (default: true),
-  lastLogin: Date,
-  createdAt: Date
+  playlists: [ObjectId],                   // Array of playlist IDs owned by user
+  isActive: Boolean,                       // Account status (default: true)
+  lastLogin: Date,                         // Last login timestamp
+  createdAt: Date,                         // Account creation timestamp
+  updatedAt: Date                          // Last update timestamp
 }
 ```
 
+**Key Features:**
+- Password automatically hashed before saving (pre-save hook)
+- Password excluded from query results by default (`.select(false)`)
+- Email must be unique and properly formatted
+- Methods: `comparePassword()`, `updateLastLogin()`, `toJSON()` (removes password)
+
 ### Song Model
+
 ```javascript
 {
-  _id: ObjectId,
-  name: String (required),
-  desc: String,
-  album: String,
-  image: String (Cloudinary URL),
-  file: String (Cloudinary audio URL),
-  duration: String (e.g., "3:45"),
-  createdAt: Date
+  _id: ObjectId,                           // Unique song identifier
+  name: String,                            // Song title (required)
+  desc: String,                            // Song description
+  album: String,                           // Album name
+  image: String,                           // Cover image URL (Cloudinary)
+  file: String,                            // Audio file URL (Cloudinary)
+  duration: String,                        // Song length (e.g., "3:45")
+  createdAt: Date                          // Upload timestamp
 }
 ```
 
 ### Album Model
+
 ```javascript
 {
-  _id: ObjectId,
-  name: String (required),
-  desc: String,
-  image: String (Cloudinary URL),
-  bgColor: String (hex color for UI),
-  createdAt: Date
+  _id: ObjectId,                           // Unique album identifier
+  name: String,                            // Album name (required)
+  desc: String,                            // Album description
+  image: String,                           // Album cover URL (Cloudinary)
+  bgColor: String,                         // Background color for UI (hex)
+  createdAt: Date                          // Creation timestamp
 }
 ```
 
 ### Playlist Model
+
 ```javascript
 {
-  _id: ObjectId,
-  name: String (required),
-  description: String,
-  user: ObjectId (owner - references User),
-  songs: [ObjectId] (references Songs),
-  createdAt: Date
+  _id: ObjectId,                           // Unique playlist identifier
+  name: String,                            // Playlist name (required)
+  description: String,                     // Playlist description
+  user: ObjectId,                          // Owner user ID (required)
+  songs: [ObjectId],                       // Array of song IDs in playlist
+  createdAt: Date                          // Creation timestamp
+}
+```
+
+**Key Features:**
+- User field ensures playlist ownership
+- Only owner can modify their playlists
+- Songs stored as references for flexible updates
+
+---
+
+## 📡 API Endpoints
+
+### Authentication Routes (`/api/auth`)
+
+| Method | Endpoint | Auth Required | Description |
+|--------|----------|---------------|-------------|
+| POST | `/api/auth/register` | No | Register new user account |
+| POST | `/api/auth/login` | No | Login user, returns JWT token |
+| GET | `/api/auth/profile` | Yes | Get current user profile |
+| PUT | `/api/auth/profile` | Yes | Update user profile information |
+| PUT | `/api/auth/change-password` | Yes | Change user password |
+| DELETE | `/api/auth/account` | Yes | Deactivate user account |
+
+**Example: User Registration**
+```javascript
+// Request
+POST /api/auth/register
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "password": "securePassword123"
+}
+
+// Response
+{
+  "success": true,
+  "message": "User registered successfully",
+  "data": {
+    "user": {
+      "id": "507f1f77bcf86cd799439011",
+      "name": "John Doe",
+      "email": "john@example.com",
+      "likedSongs": [],
+      "playlists": []
+    },
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+  }
+}
+```
+
+### Song Routes (`/api/song`)
+
+| Method | Endpoint | Auth Required | Description |
+|--------|----------|---------------|-------------|
+| GET | `/api/song/list` | No | Get all songs |
+| POST | `/api/song/add` | Yes (Admin) | Upload new song with files |
+| POST | `/api/song/remove` | Yes (Admin) | Delete a song |
+| POST | `/api/song/like` | Yes | Like a song |
+| POST | `/api/song/unlike` | Yes | Unlike a song |
+| GET | `/api/song/liked` | Yes | Get user's liked songs |
+| POST | `/api/song/recently-played` | Yes | Add song to recently played |
+| GET | `/api/song/recently-played` | Yes | Get recently played songs |
+
+### Album Routes (`/api/album`)
+
+| Method | Endpoint | Auth Required | Description |
+|--------|----------|---------------|-------------|
+| GET | `/api/album/list` | No | Get all albums |
+| POST | `/api/album/add` | Yes (Admin) | Create new album |
+| POST | `/api/album/remove` | Yes (Admin) | Delete an album |
+
+### Playlist Routes (`/api/playlist`)
+
+| Method | Endpoint | Auth Required | Description |
+|--------|----------|---------------|-------------|
+| GET | `/api/playlist/list` | Yes | Get user's playlists |
+| GET | `/api/playlist/:id` | Yes | Get specific playlist details |
+| POST | `/api/playlist/create` | Yes | Create new playlist |
+| POST | `/api/playlist/add-song` | Yes | Add song to playlist |
+| POST | `/api/playlist/remove-song` | Yes | Remove song from playlist |
+| DELETE | `/api/playlist/delete/:id` | Yes | Delete playlist |
+
+**Example: Create Playlist**
+```javascript
+// Request
+POST /api/playlist/create
+Authorization: Bearer <jwt_token>
+Content-Type: application/json
+
+{
+  "name": "My Favorite Songs",
+  "description": "A collection of my all-time favorites"
+}
+
+// Response
+{
+  "success": true,
+  "message": "Playlist created successfully",
+  "data": {
+    "id": "507f1f77bcf86cd799439012",
+    "name": "My Favorite Songs",
+    "description": "A collection of my all-time favorites",
+    "songs": [],
+    "createdAt": "2025-10-25T10:30:00.000Z"
+  }
 }
 ```
 
@@ -629,605 +603,639 @@ User → Frontend (React) → Backend (Express) → Database (MongoDB)
 
 ## 🎨 State Management
 
-### React Context API (3 Contexts)
-
-#### 1. AuthContext
-**Purpose:** User authentication state
-
-**State:**
-- `user` - Current user object
-- `isAuthenticated` - Boolean
-- `isLoading` - Boolean
-
-**Functions:**
-- `signup({ name, email, password })`
-- `login({ email, password })`
-- `logout()`
-- `updateProfile(data)`
-- `changePassword({ currentPassword, newPassword })`
-
-#### 2. PlayerContext
-**Purpose:** Music player and data management
-
-**State:**
-- `track` - Currently playing song
-- `playStatus` - Boolean (playing/paused)
-- `time` - { currentTime, totalTime }
-- `volume` - Number (0-100)
-- `isShuffled`, `isRepeating` - Booleans
-- `songsData`, `albumsData`, `playlists` - Arrays
-- `likedSongs`, `recentlyPlayed` - Arrays
-- `searchQuery`, `searchResults` - Search state
-
-**Functions:**
-- `play()`, `pause()`, `togglePlay()`
-- `playWithId(id)`, `next()`, `previous()`
-- `toggleLikeSong(songId)`, `isSongLiked(songId)`
-- `createPlaylist(name)`, `deletePlaylist(id)`
-- `addSongToPlaylist(playlistId, songId)`
-- `performSearch(query)`
-
-#### 3. ThemeContext
-**Purpose:** Theme and notifications
-
-**State:**
-- `isDark` - Boolean
-
-**Functions:**
-- `toggleTheme()`
-- `showToast(message, type)`
-
----
-
-## 🎓 Mentor Q&A | Important Technical Questions
-
-> **Purpose:** This section contains comprehensive technical questions that mentors or examiners might ask. Use these to prepare for presentations, interviews, or to deepen your understanding of the project.
-
----
-
-### 📋 **1. Project Architecture & Overview**
-
-1. **Why did you choose a three-tier architecture (Frontend, Backend, Admin Panel) instead of a monolithic approach?**
-
-2. **Explain the complete request-response flow when a user plays a song, from clicking the play button to hearing audio.**
-
-3. **What would happen to your application if Cloudinary goes down? How would you handle this scenario?**
-
-4. **Why did you separate the Admin Panel as a different React application instead of adding admin routes to the main frontend?**
-
-5. **What are the trade-offs of using MongoDB (NoSQL) versus PostgreSQL (SQL) for a music streaming application?**
-
-6. **How does your application handle concurrent users playing different songs simultaneously?**
-
-7. **Walk through the complete data flow from user signup to creating their first playlist.**
-
----
-
-### 🎨 **2. Frontend Architecture & State Management**
-
-8. **Why did you use React Context API instead of Redux or Zustand for state management?**
-
-9. **Explain the difference between PlayerContext, AuthContext, and ThemeContext. Why are they separated?**
-
-10. **Your PlayerContext is 1200+ lines. How would you refactor it to improve maintainability?**
-
-11. **How does the music player continue playing when users navigate between different pages?**
-
-12. **Explain the concept of "optimistic updates" in your liked songs feature. What happens if the API call fails?**
-
-13. **Why do you store the JWT token in localStorage instead of httpOnly cookies? What are the security implications?**
-
-14. **How does your application handle stale data when multiple tabs are open?**
-
-15. **What is the purpose of the audioRef in PlayerContext and why use useRef instead of useState?**
-
-16. **How does your search functionality work? Why is it debounced and what would happen without debouncing?**
-
-17. **Explain how the recently played timestamps are calculated ("5m ago", "2h ago"). Where is this logic implemented?**
-
-18. **How do you prevent memory leaks in your React components, especially with audio event listeners?**
-
----
-
-### 🔧 **3. Backend Architecture & API Design**
-
-19. **Why did you use Express.js v5.1.0 instead of other frameworks like NestJS or Fastify?**
-
-20. **Explain the middleware chain in your Express application. What order are they executed in?**
-
-21. **How does the authenticateToken middleware work? Walk through the token verification process.**
-
-22. **Why do you hash passwords with bcrypt and a salt round of 12? What if you increased it to 15?**
-
-23. **Explain the difference between `.select(false)` on the password field and manually deleting it in toJSON().**
-
-24. **What is the purpose of pre-save hooks in your User model? Give an example.**
-
-25. **How do you prevent timing attacks in your password comparison logic?**
-
-26. **Why did you use JWT tokens with 7-day expiration instead of session-based authentication?**
-
-27. **Explain how file uploads work with Multer and Cloudinary. Why use temporary storage?**
-
-28. **What happens if a song upload fails halfway through? How do you handle cleanup?**
-
-29. **How does your backend ensure that users can only access their own playlists?**
-
-30. **Explain the difference between `authenticateToken` and `optionalAuth` middleware. When would you use each?**
-
-31. **How do you handle CORS in production vs development? Why is it configured differently?**
-
----
-
-### 🗄️ **4. Database Design & Data Modeling**
-
-32. **Why did you use ObjectId references instead of embedding documents for the playlist-song relationship?**
-
-33. **Explain the trade-offs of storing `likedSongs` as an array in the User model versus a separate LikedSongs collection.**
-
-34. **How does the `recentlyPlayed` array work? What prevents it from growing infinitely?**
-
-35. **Why is the User model's password field set to `select: false`? What problem does this solve?**
-
-36. **How would you optimize database queries if you had 10 million songs?**
-
-37. **Explain database indexing. Which fields in your models should be indexed and why?**
-
-38. **What is the N+1 query problem and does your application have it? How would you solve it?**
-
-39. **How does MongoDB's `.populate()` work in your playlist queries?**
-
-40. **What happens if you delete a song that exists in multiple playlists? How would you handle this?**
-
-41. **Explain the concept of schema validation in Mongoose. How does it prevent bad data?**
-
-42. **How would you implement database migrations if you needed to change the schema in production?**
-
----
-
-### 🔐 **5. Authentication & Security**
-
-43. **How does your JWT token structure look? What information is stored in the payload?**
-
-44. **What security vulnerabilities existed before you fixed the hardcoded JWT_SECRET fallback?**
-
-45. **Explain CORS. Why did you restrict it to specific origins instead of allowing all (`*`)?**
-
-46. **How do you prevent NoSQL injection in your MongoDB queries?**
-
-47. **What is the difference between authentication and authorization? Give examples from your project.**
-
-48. **How would you implement refresh tokens to improve security?**
-
-49. **Why disable sourcemaps in production? What information could attackers gain from them?**
-
-50. **How do you validate user input on the backend? Show an example.**
-
-51. **What is bcrypt's salt and why is it important for password security?**
-
-52. **How would you implement rate limiting to prevent brute force attacks on login?**
-
-53. **Explain how you protect admin routes. What happens if someone tries to access them without authentication?**
-
-54. **What sensitive data should never be committed to Git? How do you prevent it?**
-
----
-
-### 🔗 **6. Frontend-Backend Integration**
-
-55. **How does Axios work in your application? Do you use interceptors?**
-
-56. **Explain the complete authentication flow from signup to accessing protected routes.**
-
-57. **How do you handle 401 (Unauthorized) responses in your frontend?**
-
-58. **What happens when a JWT token expires while a user is actively using the app?**
-
-59. **How does the frontend know which user is logged in after a page refresh?**
-
-60. **Explain the flow of adding a song to a playlist from UI click to database update.**
-
-61. **How do you handle loading states while fetching data from the API?**
-
-62. **What error handling strategies did you implement for failed API calls?**
-
-63. **How does the admin panel communicate with the backend differently from the user app?**
-
-64. **Explain how FormData works for file uploads. Why can't you use regular JSON?**
-
----
-
-### 🚀 **7. Deployment & DevOps**
-
-65. **Why did you choose Vercel for frontend and Render for backend instead of AWS or Azure?**
-
-66. **Explain how environment variables work differently in development vs production.**
-
-67. **What is the difference between `VITE_API_URL` and `process.env.MONGODB_URI`?**
-
-68. **How does Vercel build your React application? What happens during `vite build`?**
-
-69. **What is the cold start problem on Render's free tier? How does it affect users?**
-
-70. **How would you implement CI/CD for automatic deployments?**
-
-71. **What monitoring tools would you add to track errors in production?**
-
-72. **How do you ensure zero-downtime deployments when updating the backend?**
-
-73. **Explain the difference between horizontal and vertical scaling. Which would you use?**
-
-74. **What happens if your MongoDB Atlas cluster reaches its storage limit?**
-
----
-
-### ⚡ **8. Performance & Optimization**
-
-75. **How does lazy loading improve your application's performance?**
-
-76. **What is code splitting and where is it implemented in your Vite config?**
-
-77. **How does Cloudinary's CDN improve audio file delivery compared to serving from your backend?**
-
-78. **Why use React 19? What new features does it offer over React 18?**
-
-79. **How would you implement infinite scroll for the songs list?**
-
-80. **What is the purpose of `manualChunks` in your Vite build configuration?**
-
-81. **How would you optimize the PlayerContext which has 1200+ lines?**
-
-82. **What caching strategies could you implement to reduce API calls?**
-
-83. **How does TailwindCSS purge unused CSS in production?**
-
-84. **What is tree shaking and how does Vite implement it?**
-
-85. **How would you measure and improve the First Contentful Paint (FCP) time?**
-
----
-
-### 🐛 **9. Error Handling & Validation**
-
-86. **How do you handle errors in async/await functions throughout your backend?**
-
-87. **What is the purpose of the global error handling middleware in Express?**
-
-88. **How do you differentiate between 4xx client errors and 5xx server errors?**
-
-89. **Explain validation in your User model. What happens if validation fails?**
-
-90. **How do you handle file upload errors (wrong format, file too large, etc.)?**
-
-91. **What happens if MongoDB connection fails during runtime?**
-
-92. **How do you display user-friendly error messages in the frontend?**
-
-93. **What is the difference between try-catch and error boundaries in React?**
-
-94. **How do you log and track errors in production?**
-
----
-
-### 🎵 **10. Feature-Specific Deep Dive**
-
-95. **How does the shuffle algorithm work in your music player?**
-
-96. **Explain how the seek bar synchronizes with the actual audio playback.**
-
-97. **How do you track recently played songs? Why limit it to the last 5?**
-
-98. **What happens when a user creates a playlist with the same name twice?**
-
-99. **How does the "Start Listening" button decide which song to play first?**
-
-100. **Explain the difference between playing a song from the library vs. from a playlist.**
-
-101. **How does the volume control work? Is it persisted across sessions?**
-
-102. **What is the auto-advance feature and how is it implemented?**
-
-103. **How do you prevent duplicate entries in the recently played list?**
-
-104. **How does the theme toggle work? Where is the theme preference stored?**
-
----
-
-### 🔮 **11. Design Decisions & Trade-offs**
-
-105. **Why use client-side search instead of implementing it on the backend?**
-
-106. **What are the pros and cons of using Context API vs. Redux in your project?**
-
-107. **Why store user data (liked songs, playlists) in the User model instead of separate collections?**
-
-108. **What are the trade-offs of using Cloudinary instead of AWS S3?**
-
-109. **Why use React Router v7.9.4? What features does it provide?**
-
-110. **Explain the decision to use JavaScript instead of TypeScript.**
-
-111. **What are the advantages of using ES6 modules (`import/export`) vs CommonJS (`require`)?**
-
-112. **Why use Vite instead of Create React App or Webpack?**
-
----
-
-### 🚀 **12. Scalability & Future Improvements**
-
-113. **How would you handle 1 million concurrent users streaming music?**
-
-114. **What database sharding strategy would you implement for scaling?**
-
-115. **How would you implement a recommendation system ("Songs you might like")?**
-
-116. **What caching layer (Redis, Memcached) would you add and why?**
-
-117. **How would you implement real-time features like "Currently listening" for friends?**
-
-118. **What analytics would you track (play counts, skip rates, etc.) and how?**
-
-119. **How would you implement playlist sharing between users?**
-
-120. **What testing strategy would you implement (unit, integration, e2e)?**
-
-121. **How would you add podcast support to your music streaming platform?**
-
-122. **What microservices architecture would you propose for scaling this application?**
-
-123. **How would you implement a subscription/payment system for premium users?**
-
-124. **What would be your strategy for handling music licensing and copyright?**
-
----
-
-### 🎯 **13. Conceptual & Problem-Solving**
-
-125. **If the backend takes 2 seconds to respond, how does it affect user experience? How would you solve it?**
-
-126. **How would you implement offline playback for downloaded songs?**
-
-127. **What happens if two users try to delete the same song simultaneously?**
-
-128. **How would you implement a queue system for music playback?**
-
-129. **What would you do if users report songs skipping or buffering?**
-
-130. **How would you implement lyrics display synchronized with audio?**
-
-131. **What strategy would you use for A/B testing new features?**
-
-132. **How would you implement user roles (basic user, premium user, admin)?**
-
-133. **How would you handle a situation where your Cloudinary account gets suspended?**
-
-134. **What would your disaster recovery plan look like?**
-
----
-
-### 🎓 **14. Meta Questions (About Your Learning)**
-
-135. **What was the most challenging part of building this project?**
-
-136. **What would you do differently if you started this project from scratch?**
-
-137. **What new technology or concept did you learn while building this?**
-
-138. **How long did it take to build this project and how did you manage time?**
-
-139. **What resources (documentation, tutorials, Stack Overflow) helped you the most?**
-
-140. **How did you debug issues during development?**
-
-141. **What part of the project are you most proud of and why?**
-
-142. **If you had one more week, what feature would you add?**
-
----
-
-### ✅ **How to Use This Q&A Section:**
-
-**For Preparation:**
-1. ✅ **Answer each question out loud** - Practice explaining to an imaginary mentor
-2. ✅ **Write down answers** - Helps solidify understanding
-3. ✅ **Draw diagrams** - Visualize architecture, data flow, authentication flow
-4. ✅ **Identify gaps** - Questions you struggle with need more study
-5. ✅ **Reference your code** - Point to specific files and line numbers
-
-**For Presentation:**
-1. ✅ **Be honest** - It's okay to say "I'd need to research that" but explain your thought process
-2. ✅ **Explain trade-offs** - Most decisions have pros and cons
-3. ✅ **Use examples** - Real scenarios from your project
-4. ✅ **Show understanding** - Explain WHY, not just WHAT
-
-**💡 Pro Tip:** The best answers show understanding of **WHY** you made decisions, not just **WHAT** you built. Always discuss alternatives you considered and reasons for your choices.
-
----
-
-## 🔥 Recent Changes & Improvements
-
-### Major Features Added:
-1. **User-Specific Playlists**: Each user now has their own playlists with owner-only access
-2. **Recently Played Tracking**: Accurate timestamps showing when songs were played (e.g., "5m ago", "2h ago")
-3. **Toast Notification System**: Custom toast system with duplicate prevention
-4. **Multi-User Support**: Complete isolation of user data (playlists, liked songs, recently played)
-5. **"Start Listening" Button**: Now plays songs sequentially from the entire songs collection
-
-### Critical Bugs Fixed:
-1. ✅ **Fixed 500 Error on Recently Played**: Backend now handles deleted songs gracefully
-2. ✅ **Fixed Duplicate Toast Messages**: Removed React.StrictMode and added duplicate prevention
-3. ✅ **Fixed Playlist Authentication**: All playlist operations now require user authentication
-4. ✅ **Fixed Property Name Mismatch**: Changed `lastPlayed` to `playedAt` for consistency
-5. ✅ **Fixed LocalStorage Conflicts**: Only authenticated users use backend data
-6. ✅ **Fixed Time Display**: Shows accurate time differences instead of generic "Just now"
-7. ✅ **Removed Sample Playlists**: Cleaned up all sample playlist data
-
-### Performance Optimizations:
-- Removed duplicate API calls by consolidating useEffect hooks
-- Optimized localStorage usage (only for non-authenticated users)
-- Improved toast ID generation for better uniqueness
-- Added duplicate message prevention in toast system
-- Disabled sourcemaps in production builds
-- Enabled code splitting for React vendor chunks
-- Minification with esbuild for faster loads
-
-### Security Improvements:
-- ✅ Created comprehensive .gitignore files (root, Backend, frontend, admin)
-- ✅ All sensitive files (.env) properly protected
-- ✅ JWT secret vulnerability fixed
-- ✅ Admin routes secured with authentication
-- ✅ CORS configured for specific origins only
-
----
-
-## ⚠️ Common Issues & Solutions
-
-| Problem | Solution |
-|---------|----------|
-| Backend won't start | Check if MongoDB is running |
-| CORS error | Verify VITE_API_URL matches backend URL |
-| Songs won't play | Check Cloudinary URLs are accessible |
-| 401 Unauthorized | Log in again (token expired) |
-| File upload fails | Verify Cloudinary credentials in .env |
-| No songs showing | Check backend running, verify API returns data |
-| Login not working | Verify JWT_SECRET is set in backend .env |
-| Images not loading | Verify Cloudinary credentials and check image URLs |
-| API not responding | Check if backend is running and VITE_API_URL is correct |
-
----
-
-## 📝 Maintenance Schedule
-
-### Weekly
-- [ ] Check uptime monitoring reports
-- [ ] Review error logs
-- [ ] Monitor disk usage
-
-### Monthly
-- [ ] Update dependencies: `npm audit fix`
-- [ ] Backup MongoDB database
-- [ ] Review performance metrics
-- [ ] Check Cloudinary storage usage
-
-### Quarterly
-- [ ] Review security best practices
-- [ ] Update Node.js version if needed
-- [ ] Review and optimize database indexes
-- [ ] Update documentation
-
----
-
-## 📊 Project Statistics
-
-- **Total Files:** 100+ files
-- **Lines of Code:** ~15,000 lines
-  - Backend: ~2,500 lines
-  - Frontend: ~10,000 lines
-  - Admin: ~2,500 lines
-- **React Components:** 30+ components
-- **API Endpoints:** 25+ RESTful endpoints
-- **Database Models:** 4 models
-- **Context Providers:** 3 contexts
-- **Features:** 12+ major features
-
----
-
-## 🎯 What Makes This Project Special
-
-1. **Not a Tutorial** - Custom features like recently played with accurate timestamps
-2. **Production-Ready** - Comprehensive error handling, authentication, security
-3. **Complete Ecosystem** - User app + Admin panel + Backend API
-4. **Modern Stack** - React 19, Vite, TailwindCSS, MongoDB
-5. **Real-World Features** - User isolation, optimistic updates, search, themes
-6. **Fully Documented** - Complete setup, deployment, and explanation guides
-7. **Security-First** - All vulnerabilities fixed, ready for production
-
----
-
-## ✅ Final Verification Checklist
-
-### Development
-- [x] Backend with 25+ API endpoints
-- [x] Frontend with 30+ components
-- [x] Admin panel for content management
-- [x] User authentication with JWT
-- [x] File upload system with Cloudinary
-- [x] Music player with all controls
-- [x] Playlist management (create, edit, delete)
-- [x] Liked songs functionality
-- [x] Recently played tracking
-- [x] Search functionality
-- [x] Dark/light theme
-- [x] Responsive design
-
-### Security
-- [x] JWT secret properly configured
-- [x] .gitignore created
-- [x] Admin routes protected
-- [x] CORS configured
-- [x] .env.example files created
-- [x] Sourcemaps disabled
-- [x] Environment variables documented
-
-### Deployment
-- [x] All builds successful
-- [x] No critical errors
-- [x] Environment variables documented
-- [x] Production .env files created
-- [x] MongoDB Atlas configured
-- [x] Deployed to hosting platform (Vercel + Render)
-- [x] **LIVE AND RUNNING** 🚀
-
----
-
-## 📝 Quick Reference
-
-### Key Files to Know
-- `Backend/server.js` - Main server entry
-- `Backend/src/controllers/authController.js` - Authentication logic
-- `Music Web Application/src/context/PlayerContext.jsx` - Player state (1200+ lines)
-- `Music Web Application/src/components/Player.jsx` - Player UI
-- `admin/src/pages/AddSong.jsx` - File upload
-
-### Environment Variables
-
-**Backend:**
-```env
-PORT, NODE_ENV, MONGO_URI, JWT_SECRET,
-CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET,
-FRONTEND_URL, ADMIN_URL
+The application uses **React Context API** for global state management, organized into three separate contexts:
+
+### 1. AuthContext (`AuthContext.jsx`)
+
+**Purpose:** Manages user authentication state
+
+**State Variables:**
+```javascript
+{
+  user: Object | null,           // Current user object
+  isAuthenticated: Boolean,      // Login status
+  isLoading: Boolean,            // Loading state during auth operations
+  token: String | null           // JWT authentication token
+}
 ```
 
-**Frontend & Admin:**
-```env
-VITE_API_URL
+**Functions:**
+- `signup({ name, email, password })` - Register new user
+- `login({ email, password })` - Authenticate user
+- `logout()` - Clear user session
+- `updateProfile(data)` - Update user information
+- `changePassword({ currentPassword, newPassword })` - Change password
+
+**Usage:**
+```javascript
+const { user, isAuthenticated, login, logout } = useAuth();
 ```
 
-### Ports
-- Backend: 4000
-- Frontend: 3000
-- Admin: 5173
+### 2. PlayerContext (`PlayerContext.jsx`)
+
+**Purpose:** Manages music player state and application data
+
+**State Variables:**
+```javascript
+{
+  // Player State
+  track: Object | null,          // Currently playing song
+  playStatus: Boolean,           // Playing or paused
+  time: {
+    currentTime: Number,         // Current playback time (seconds)
+    totalTime: Number            // Total song duration (seconds)
+  },
+  volume: Number,                // Volume level (0-100)
+  isShuffled: Boolean,           // Shuffle mode enabled
+  isRepeating: Boolean,          // Repeat mode enabled
+  
+  // Application Data
+  songsData: Array,              // All available songs
+  albumsData: Array,             // All available albums
+  playlists: Array,              // User's playlists
+  likedSongs: Array,             // User's liked songs
+  recentlyPlayed: Array,         // Recently played tracks
+  
+  // Search State
+  searchQuery: String,           // Current search text
+  searchResults: Object          // Search results by category
+}
+```
+
+**Functions:**
+- `play()` / `pause()` / `togglePlay()` - Control playback
+- `playWithId(songId, playlist)` - Play specific song
+- `next()` / `previous()` - Navigate songs
+- `seekSong(time)` - Jump to specific time
+- `setVolume(level)` - Adjust volume
+- `toggleLikeSong(songId)` - Like/unlike song
+- `isSongLiked(songId)` - Check if song is liked
+- `createPlaylist(name, description)` - Create new playlist
+- `deletePlaylist(id)` - Delete playlist
+- `addSongToPlaylist(playlistId, songId)` - Add song to playlist
+- `removeSongFromPlaylist(playlistId, songId)` - Remove song from playlist
+- `performSearch(query)` - Search content
+
+**Usage:**
+```javascript
+const { track, playStatus, playWithId, next, previous } = usePlayer();
+```
+
+### 3. ThemeContext (`ThemeContext.jsx`)
+
+**Purpose:** Manages UI theme and notifications
+
+**State Variables:**
+```javascript
+{
+  isDark: Boolean,               // Dark mode enabled
+  toasts: Array                  // Active toast notifications
+}
+```
+
+**Functions:**
+- `toggleTheme()` - Switch between light/dark mode
+- `showToast(message, type)` - Display notification (success, error, info)
+
+**Usage:**
+```javascript
+const { isDark, toggleTheme, showToast } = useTheme();
+```
 
 ---
 
-**🎉 Your MusicFlow platform is 100% complete, fully documented, and DEPLOYED! 🎉**
+## 🔒 Security Features
 
-**Deployment Status:**
-- ✅ **Frontend:** Deployed on Vercel
-- ✅ **Backend:** Deployed on Render
-- ✅ **Status:** LIVE AND RUNNING 🚀
+### 1. Authentication & Authorization
 
-**For detailed security fixes, see the Security Fixes Applied section above.**  
-**For mentor presentation, use the Mentor Presentation Guide section.**
+**JWT Token Implementation:**
+- Tokens generated with 7-day expiration
+- Payload contains only user ID (minimal data exposure)
+- Secret stored in environment variables (never hardcoded)
+- Tokens verified on every protected route
 
-**Date Created:** October 24, 2025  
-**Last Updated:** October 25, 2025  
-**Status:** ✅ Deployed & Production Ready  
-**Security:** ✅ All Critical Issues Fixed  
-**Documentation:** ✅ Complete  
-**Deployment:** ✅ Live on Vercel + Render
+**Password Security:**
+- Passwords hashed using bcrypt with salt rounds: 12
+- Pre-save hook automatically hashes passwords before database storage
+- Password field excluded from queries by default (`.select(false)`)
+- Comparison done using bcrypt's timing-attack-safe compare function
+
+### 2. Input Validation
+
+**Backend Validation:**
+- Mongoose schema validation for all models
+- Email format validation with regex
+- Password minimum length (6 characters)
+- Name length constraints (2-50 characters)
+- Custom error messages for validation failures
+
+**Frontend Validation:**
+- Form validation before API submission
+- Real-time error feedback to users
+- Sanitization of user inputs
+
+### 3. CORS Configuration
+
+**Restricted Origins:**
+```javascript
+const allowedOrigins = [
+  process.env.FRONTEND_URL,   // User app URL
+  process.env.ADMIN_URL       // Admin panel URL
+];
+```
+
+**Benefits:**
+- Prevents unauthorized cross-origin requests
+- Allows credentials (cookies, authorization headers)
+- Protects against CSRF attacks
+
+### 4. Data Protection
+
+**User Data Isolation:**
+- Playlists filtered by owner user ID
+- Liked songs stored per user
+- Recently played tracked per user
+- No access to other users' private data
+
+**Environment Variables:**
+- All secrets stored in `.env` files
+- `.env` files excluded from Git (`.gitignore`)
+- Separate environment configs for dev/production
+
+### 5. Production Security
+
+**Build Optimizations:**
+- Sourcemaps disabled in production (prevents code exposure)
+- Code minification and obfuscation
+- Tree shaking to remove unused code
+- Environment-specific error messages (detailed in dev, generic in prod)
+
+**Best Practices:**
+- HTTPS enforced on production
+- Regular dependency updates (`npm audit`)
+- Error logging without exposing sensitive data
+- Proper HTTP status codes (401, 403, 404, 500)
 
 ---
 
-**Built with ❤️ for music lovers everywhere**
+## 🎓 Mentor Q&A
+
+### Q1: How does the authentication system work in this application?
+
+**Answer:** The application uses JWT (JSON Web Tokens) for authentication. Here's the flow:
+
+1. **Registration/Login:** When a user signs up or logs in, the backend validates credentials and generates a JWT token containing the user's ID.
+2. **Token Storage:** The frontend stores this token in `localStorage`.
+3. **Protected Requests:** For every API request to protected routes, the frontend includes the token in the `Authorization` header as `Bearer <token>`.
+4. **Token Verification:** The backend middleware (`authenticateToken`) verifies the token using the secret key, decodes it to extract the user ID, and attaches user info to the request object.
+5. **Access Control:** The backend uses the extracted user ID to ensure users can only access their own data (playlists, liked songs, etc.).
+
+Passwords are hashed using bcrypt with 12 salt rounds before storage, and the password field is excluded from database queries by default for security.
+
+---
+
+### Q2: Explain how the music player works and maintains state across page navigation.
+
+**Answer:** The music player is implemented using:
+
+1. **HTML5 Audio API:** An `<audio>` element is controlled via React `useRef`, allowing programmatic control of playback.
+
+2. **PlayerContext:** A React Context (1200+ lines) manages all player state globally:
+   - Current track information
+   - Play/pause status
+   - Current time and duration
+   - Volume level
+   - Playlist queue
+
+3. **State Persistence:** Since PlayerContext wraps the entire app at the root level, the audio element and its state persist across route changes. When users navigate to different pages, the Context remains mounted, so music continues playing.
+
+4. **Event Listeners:** The audio element has event listeners for:
+   - `timeupdate` - Updates progress bar in real-time
+   - `ended` - Triggers auto-advance to next song
+   - `loadedmetadata` - Gets song duration
+
+5. **Playback Flow:**
+   - User clicks play → `playWithId(songId)` called
+   - Song data fetched from `songsData` array
+   - Audio source set to Cloudinary URL
+   - `audioRef.current.play()` starts playback
+   - Recently played entry added to database
+
+---
+
+### Q3: How do you handle file uploads to Cloudinary?
+
+**Answer:** File uploads follow this process:
+
+1. **Frontend:** Admin selects audio file and cover image through a form. Files are packaged in a `FormData` object (required for multipart file uploads).
+
+2. **Multer Middleware:** On the backend, Multer intercepts the request and saves files temporarily to the server's `uploads/` directory.
+
+3. **Cloudinary Upload:** The controller extracts file paths and uploads them to Cloudinary using their API:
+   ```javascript
+   const audioUpload = await cloudinary.uploader.upload(audioFile.path, {
+     resource_type: 'video' // For audio files
+   });
+   ```
+
+4. **URL Storage:** Cloudinary returns secure URLs (CDN links) for the uploaded files. These URLs are saved to MongoDB in the song document.
+
+5. **Cleanup:** Temporary files are deleted from the server using `fs.unlink()` to free up storage.
+
+6. **CDN Benefits:** Songs are served from Cloudinary's global CDN, providing:
+   - Fast delivery worldwide
+   - Automatic optimization
+   - Reduced server load
+   - Better user experience
+
+---
+
+### Q4: What database design decisions did you make and why?
+
+**Answer:** I chose MongoDB (NoSQL) with the following design:
+
+**Four Collections:**
+1. **Users** - Stores user accounts and preferences
+2. **Songs** - Stores individual tracks
+3. **Albums** - Groups songs into collections
+4. **Playlists** - User-created song lists
+
+**Key Design Decisions:**
+
+1. **ObjectId References vs. Embedding:**
+   - Used references for songs in playlists (instead of embedding full song objects)
+   - **Why:** Allows song updates to reflect everywhere automatically
+   - **Trade-off:** Requires `.populate()` calls, but more flexible
+
+2. **Liked Songs in User Model:**
+   - Stored as an array of ObjectIds in the User document
+   - **Why:** Fast access, minimal queries, perfect for "liked songs" page
+   - **Trade-off:** Array size limited (MongoDB document size limit: 16MB), but acceptable for this use case
+
+3. **Recently Played Subdocuments:**
+   - Embedded as subdocuments with timestamps in User model
+   - **Why:** Keeps history with the user, easy to limit to last 5 entries
+   - **Trade-off:** Slightly larger user documents, but negligible
+
+4. **MongoDB Advantages:**
+   - Flexible schema (easy to add new fields)
+   - Fast read operations (important for browsing music)
+   - JSON-like documents (matches JavaScript objects)
+   - Horizontal scaling support
+
+**Indexing Strategy:**
+- Email field indexed and unique (fast login lookups)
+- Song name indexed (fast search)
+- User ID indexed in playlists (fast user data queries)
+
+---
+
+### Q5: How do you ensure users can only access their own playlists?
+
+**Answer:** User data isolation is achieved through JWT-based authentication:
+
+1. **Token Extraction:** When a user makes a request, the `authenticateToken` middleware verifies the JWT and extracts the user ID:
+   ```javascript
+   const decoded = jwt.verify(token, process.env.JWT_SECRET);
+   req.user = { userId: decoded.userId };
+   ```
+
+2. **Query Filtering:** In playlist controllers, all database queries filter by the authenticated user:
+   ```javascript
+   const playlists = await Playlist.find({ user: req.user.userId });
+   ```
+
+3. **Ownership Verification:** Before allowing updates or deletes, the backend verifies the playlist belongs to the requesting user:
+   ```javascript
+   const playlist = await Playlist.findById(playlistId);
+   if (playlist.user.toString() !== req.user.userId) {
+     return res.status(403).json({ message: 'Access denied' });
+   }
+   ```
+
+4. **Frontend Protection:** The frontend only displays the current user's data and doesn't expose endpoints to access other users' content.
+
+This ensures complete data isolation - users cannot see, modify, or delete other users' playlists, liked songs, or listening history.
+
+---
+
+### Q6: What optimizations have you implemented for production?
+
+**Answer:** Several optimizations ensure good performance in production:
+
+**Frontend Optimizations:**
+
+1. **Code Splitting:**
+   - Vite's `manualChunks` configuration separates React libraries from app code
+   - Vendor bundle cached separately (React, React-DOM, React Router)
+   - Results in faster subsequent page loads
+
+2. **Tree Shaking:**
+   - Vite automatically removes unused code during build
+   - Reduces bundle size significantly
+
+3. **Asset Optimization:**
+   - CSS purging via TailwindCSS (removes unused styles)
+   - Image lazy loading
+   - Minification with esbuild (fast and efficient)
+
+4. **No Sourcemaps:**
+   - Disabled in production to prevent source code exposure
+   - Makes it harder for attackers to reverse-engineer the app
+
+**Backend Optimizations:**
+
+1. **Cloudinary CDN:**
+   - Audio files served from global CDN (not backend)
+   - Reduces server load and bandwidth costs
+   - Faster delivery for users worldwide
+
+2. **Database Indexing:**
+   - Email field indexed (fast user lookups)
+   - User ID indexed in playlists (fast query filtering)
+
+3. **Error Handling:**
+   - Generic error messages in production (no stack traces exposed)
+   - Detailed logs on server side for debugging
+
+4. **Connection Pooling:**
+   - Mongoose maintains connection pool to MongoDB
+   - Reuses connections instead of creating new ones per request
+
+**Deployment Architecture:**
+
+- **Vercel (Frontend):** Edge network deployment, automatic HTTPS, global CDN
+- **Render (Backend):** Auto-scaling, health checks, rolling deployments
+- **MongoDB Atlas:** Automated backups, replication, auto-scaling storage
+
+---
+
+### Q7: How would you scale this application for 1 million users?
+
+**Answer:** To scale for 1 million users, I would implement:
+
+**1. Database Scaling:**
+- **Sharding:** Partition MongoDB collections by user ID (horizontal scaling)
+- **Indexing:** Add compound indexes for common queries
+- **Read Replicas:** Set up replica sets for read-heavy operations
+- **Connection Pooling:** Optimize Mongoose connection pool size
+
+**2. Caching Layer:**
+- **Redis:** Cache frequently accessed data (songs list, album data)
+- **CDN Caching:** Set proper cache headers for static content
+- **API Response Caching:** Cache responses for public endpoints (song list, albums)
+- **Time-to-Live (TTL):** Set appropriate expiration times
+
+**3. Backend Scaling:**
+- **Load Balancing:** Distribute traffic across multiple backend instances
+- **Microservices:** Separate concerns (auth service, media service, playlist service)
+- **Message Queue:** Use RabbitMQ/Kafka for async operations (file processing, notifications)
+- **Rate Limiting:** Prevent abuse and ensure fair resource usage
+
+**4. Frontend Optimization:**
+- **Lazy Loading:** Load components on-demand (not all at startup)
+- **Virtual Scrolling:** Render only visible songs in long lists
+- **Service Workers:** Enable offline capabilities and faster loads
+- **Image Optimization:** WebP format, responsive images, lazy loading
+
+**5. Media Delivery:**
+- **Adaptive Bitrate:** Serve different audio qualities based on connection
+- **Cloudinary Advanced:** Use auto-format, auto-quality features
+- **HLS/DASH Streaming:** Implement proper streaming protocols
+- **Pre-signed URLs:** Generate temporary URLs for secure media access
+
+**6. Monitoring & Analytics:**
+- **APM Tools:** New Relic or Datadog for performance monitoring
+- **Error Tracking:** Sentry for real-time error alerts
+- **Logging:** Centralized logging with ELK stack (Elasticsearch, Logstash, Kibana)
+- **Metrics:** Track user engagement, play counts, peak usage times
+
+**7. Security at Scale:**
+- **DDoS Protection:** Cloudflare or AWS Shield
+- **Rate Limiting:** Per-user and per-IP limits
+- **Bot Detection:** Prevent automated abuse
+- **API Gateway:** Kong or AWS API Gateway for central security policies
+
+---
+
+### Q8: Explain the trade-offs between Context API and Redux for this project.
+
+**Answer:** I chose Context API over Redux. Here's the comparison:
+
+**Context API (Current Implementation):**
+
+**Pros:**
+- ✅ Built into React (no external dependencies)
+- ✅ Simple to set up (just `createContext()` and `Provider`)
+- ✅ Perfect for small to medium apps
+- ✅ Less boilerplate code
+- ✅ Easy to understand for team members
+- ✅ Good enough for current scale (~15k lines of code)
+
+**Cons:**
+- ❌ Can cause unnecessary re-renders if not optimized
+- ❌ No built-in DevTools
+- ❌ Context consumers re-render when any context value changes
+- ❌ Can become complex with many contexts
+
+**Redux (Alternative):**
+
+**Pros:**
+- ✅ Redux DevTools (time-travel debugging, action replay)
+- ✅ Better performance at scale (selective re-renders)
+- ✅ Middleware for async operations (Redux Thunk/Saga)
+- ✅ Predictable state updates (single source of truth)
+- ✅ Great for very large applications
+
+**Cons:**
+- ❌ More boilerplate (actions, reducers, store configuration)
+- ❌ Steeper learning curve
+- ❌ Extra dependency (~50KB)
+- ❌ Overkill for this project's complexity
+
+**My Decision:**
+Context API is appropriate for MusicFlow because:
+1. State is logically separated (Auth, Player, Theme)
+2. Updates are not extremely frequent
+3. Team can understand it quickly
+4. Reduces bundle size
+5. Sufficient for current user base
+
+**When I'd Choose Redux:**
+- If the app grew to 100+ components
+- If state updates became performance bottleneck
+- If I needed time-travel debugging
+- If team had strong Redux experience
+
+---
+
+### Q9: What security vulnerabilities did you fix in this project?
+
+**Answer:** I identified and fixed 8 critical security vulnerabilities:
+
+**1. JWT Secret Hardcoded Fallback (CRITICAL):**
+- **Issue:** Code had `process.env.JWT_SECRET || 'your-secret-key'`
+- **Risk:** Attackers could forge tokens using the fallback key
+- **Fix:** Removed fallback, app fails to start if JWT_SECRET not set
+- **Why Critical:** Compromises entire authentication system
+
+**2. Missing .gitignore (CRITICAL):**
+- **Issue:** `.env` files could be committed to Git
+- **Risk:** Secrets exposed in version control/GitHub
+- **Fix:** Created `.gitignore` files for all directories
+- **Why Critical:** Permanent exposure of credentials
+
+**3. Unprotected Admin Routes (CRITICAL):**
+- **Issue:** Anyone could upload/delete songs without authentication
+- **Risk:** Malicious content upload, data deletion
+- **Fix:** Added `authenticateToken` middleware to admin routes
+- **Why Critical:** Allows unauthorized content manipulation
+
+**4. Open CORS Policy (HIGH):**
+- **Issue:** API accepted requests from any origin (`*`)
+- **Risk:** CSRF attacks, unauthorized data access
+- **Fix:** Restricted to specific frontend and admin URLs
+- **Why Important:** Prevents cross-site attacks
+
+**5. Sourcemaps in Production (MEDIUM):**
+- **Issue:** Source code visible in production builds
+- **Risk:** Attackers can reverse-engineer logic
+- **Fix:** Disabled sourcemaps in Vite config
+- **Why Important:** Code obfuscation
+
+**6. Generic Error Messages Missing:**
+- **Issue:** Detailed stack traces exposed in production
+- **Risk:** Information leakage aids attackers
+- **Fix:** Environment-specific error messages
+- **Why Important:** Security through obscurity
+
+**7. Password Not Excluded by Default:**
+- **Issue:** Password field sometimes included in responses
+- **Risk:** Password hash exposure
+- **Fix:** Set `select: false` in User schema
+- **Why Important:** Protects password data
+
+**8. No Input Validation:**
+- **Issue:** Missing validation on some endpoints
+- **Risk:** NoSQL injection, malformed data
+- **Fix:** Added Mongoose validators and input sanitization
+- **Why Important:** Prevents injection attacks
+
+These fixes ensure the application is production-ready and secure.
+
+---
+
+### Q10: What would you improve if you rebuilt this project?
+
+**Answer:** If I started from scratch, I would make these improvements:
+
+**1. TypeScript:**
+- **Why:** Type safety catches bugs during development
+- **Benefit:** Better IDE autocomplete, fewer runtime errors
+- **Example:** Prevent passing wrong data types to functions
+
+**2. Testing:**
+- **Backend:** Jest for unit tests, Supertest for API tests
+- **Frontend:** React Testing Library for component tests
+- **E2E:** Playwright or Cypress for full user flows
+- **Why:** Confidence in code changes, catch regressions
+
+**3. Better State Management:**
+- **Option 1:** Zustand (simpler than Redux, better than Context)
+- **Option 2:** React Query (for server state) + Context (for UI state)
+- **Why:** Better performance, easier testing, clearer separation
+
+**4. Improved Architecture:**
+- **Backend:** Clean architecture with service layer
+  ```
+  Routes → Controllers → Services → Models
+  ```
+- **Frontend:** Feature-based folder structure
+  ```
+  features/player, features/auth, features/playlists
+  ```
+- **Why:** Better organization, easier to find code
+
+**5. Advanced Features:**
+- **Streaming:** Implement HLS/DASH for better buffering
+- **Recommendations:** ML-based song suggestions
+- **Social Features:** Follow friends, share playlists
+- **Analytics:** Track popular songs, user behavior
+- **Lyrics:** Synchronized lyrics display
+
+**6. Performance Optimizations:**
+- **Infinite Scroll:** Load songs on-demand (not all at once)
+- **Virtual Lists:** Render only visible items
+- **Service Workers:** Offline support, faster loads
+- **Database Denormalization:** Store frequently accessed data together
+
+**7. DevOps Improvements:**
+- **CI/CD Pipeline:** Automated testing and deployment
+- **Docker:** Containerize all services
+- **Monitoring:** Prometheus + Grafana for metrics
+- **Logging:** Centralized logging with ELK stack
+
+**8. Security Enhancements:**
+- **Refresh Tokens:** Short-lived access tokens + long-lived refresh tokens
+- **Rate Limiting:** Prevent brute force attacks
+- **2FA:** Two-factor authentication for extra security
+- **CSP Headers:** Content Security Policy headers
+
+Despite these potential improvements, the current implementation successfully demonstrates:
+- ✅ Full-stack development skills
+- ✅ Modern technology integration
+- ✅ Secure authentication
+- ✅ File upload management
+- ✅ Production deployment
+- ✅ Responsive design
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Please follow these steps:
+
+1. **Fork the repository**
+2. **Create a feature branch:** `git checkout -b feature/AmazingFeature`
+3. **Commit your changes:** `git commit -m 'Add some AmazingFeature'`
+4. **Push to the branch:** `git push origin feature/AmazingFeature`
+5. **Open a Pull Request**
+
+### Code Style Guidelines
+
+- Follow existing code formatting
+- Use meaningful variable and function names
+- Add comments for complex logic
+- Write self-documenting code
+- Test your changes locally before submitting
+
+---
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+---
+
+## 📞 Contact & Support
+
+- **Website:** [https://music-flow-six.vercel.app/](https://music-flow-six.vercel.app/)
+- **Email:** your.email@example.com
+- **GitHub:** [@yourusername](https://github.com/yourusername)
+
+---
+
+## 🙏 Acknowledgments
+
+- **React Team** - For the amazing UI library
+- **MongoDB** - For the flexible database solution
+- **Cloudinary** - For reliable cloud media storage
+- **Vercel & Render** - For seamless deployment platforms
+- **TailwindCSS** - For the utility-first CSS framework
+
+---
+
+**Built with ❤️ by [Your Name] | October 2025**
+
+**Status:** ✅ Production Ready | 🚀 Deployed | 🔒 Secure
 

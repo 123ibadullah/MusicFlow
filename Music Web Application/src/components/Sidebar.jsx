@@ -14,6 +14,7 @@ const Sidebar = () => {
 
   // Only show functional menu items that have data or purpose
   const mainMenu = [
+    
     { id: 'home', path: '/', label: 'Home', icon: '🏠', functional: true },
     { id: 'search', path: '/search', label: 'Search', icon: '🔍', functional: true },
     { id: 'songs', path: '/songs', label: 'All Songs', icon: '🎧', functional: songsData.length > 0 },
