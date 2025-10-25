@@ -1,58 +1,43 @@
 # 🎵 MusicFlow - Complete Music Streaming Platform
 
 ## 📑 Table of Contents
-1. [Quick Start](#-quick-start-3-terminals)
-2. [Security Status](#-security-status)
-3. [Project Overview](#-project-overview)
-4. [Tech Stack](#-complete-tech-stack)
-5. [Project Structure](#-complete-project-structure)
-6. [Complete Setup Guide](#-complete-setup-guide)
-7. [Security Fixes Applied](#-security-fixes-applied)
-8. [Features Explained](#-main-features-explained)
-9. [System Architecture](#-system-architecture)
-10. [API Documentation](#-api-documentation)
-11. [Database Schema](#-database-schema)
-12. [State Management](#-state-management)
-13. [Deployment Guide](#-deployment-guide)
-14. [Recent Changes & Improvements](#-recent-changes--improvements)
-15. [Mentor Presentation Guide](#-mentor-presentation-guide)
-16. [Common Issues & Solutions](#-common-issues--solutions)
-17. [Maintenance Schedule](#-maintenance-schedule)
-18. [Project Stats](#-project-statistics)
+1. [Live Deployment](#-live-deployment)
+2. [Project Overview](#-project-overview)
+3. [Tech Stack](#-complete-tech-stack)
+4. [Key Features](#-main-features-explained)
+5. [System Architecture](#-system-architecture)
+6. [Project Structure](#-complete-project-structure)
+7. [Database Schema](#-database-schema)
+8. [API Documentation](#-api-documentation)
+9. [State Management](#-state-management)
+10. [Security Status](#-security-status)
+11. [Mentor Q&A](#-mentor-qa--important-technical-questions)
+12. [Local Development Setup](#-local-development-setup-optional)
+13. [Recent Changes & Improvements](#-recent-changes--improvements)
+14. [Common Issues & Solutions](#-common-issues--solutions)
+15. [Project Stats](#-project-statistics)
 
 ---
 
-## 🚀 Quick Start (3 Terminals)
+## 🌐 Live Deployment
 
-### **Terminal 1 - Backend:**
-```bash
-cd Backend
-npm install
-cp .env.example .env  # Then edit with your credentials
-node -e "console.log(require('crypto').randomBytes(64).toString('hex'))"  # Generate JWT_SECRET
-npm start  # Runs on http://localhost:4000
-```
+### ✅ **The website is LIVE and fully functional!**
 
-### **Terminal 2 - Frontend:**
-```bash
-cd "Music Web Application"
-npm install
-cp .env.example .env  # Defaults to localhost:4000
-npm run dev  # Runs on http://localhost:3000
-```
+**🚀 Access the Application:**
 
-### **Terminal 3 - Admin Panel:**
-```bash
-cd admin
-npm install
-cp .env.example .env  # Defaults to localhost:4000
-npm run dev  # Runs on http://localhost:5173
-```
+| Service | URL | Description |
+|---------|-----|-------------|
+| 🎵 **User App** | [https://music-flow-six.vercel.app/](https://music-flow-six.vercel.app/) | Main music streaming application |
+| ⚙️ **Admin Panel** | [https://music-flow-91y6.vercel.app/](https://music-flow-91y6.vercel.app/) | Content management dashboard |
+| 🔧 **Backend API** | Hosted on Render | RESTful API server |
 
-**Verification:**
-- Backend: `http://localhost:4000/api/health`
-- Frontend: `http://localhost:3000`
-- Admin: `http://localhost:5173`
+**Deployment Stack:**
+- **Frontend & Admin:** Vercel (Edge Network)
+- **Backend:** Render (Cloud Platform)
+- **Database:** MongoDB Atlas (Cloud Database)
+- **Media Storage:** Cloudinary (CDN)
+
+**Status:** 🟢 All systems operational
 
 ---
 
@@ -194,105 +179,68 @@ MusicWebApplication/
 
 ---
 
-## 🚀 Complete Setup Guide
+## 💻 Local Development Setup (Optional)
 
-### Prerequisites
-- **Node.js** (v16 or higher) - [Download](https://nodejs.org/)
-- **MongoDB** (local or MongoDB Atlas)
-- **Cloudinary account** - [Sign up](https://cloudinary.com/)
+> **Note:** The application is already deployed and live at the URLs above. This section is only for developers who want to run the project locally for development or testing purposes.
 
-### Step 1: Clone Repository
+### Quick Local Setup
+
+**Prerequisites:**
+- Node.js (v16+)
+- MongoDB (local or Atlas)
+- Cloudinary account
+
+**1. Clone & Install:**
 ```bash
-git clone <your-repository-url>
+git clone <repository-url>
 cd MusicWebApplication
+
+# Backend
+cd Backend && npm install
+
+# Frontend
+cd "../Music Web Application" && npm install
+
+# Admin
+cd ../admin && npm install
 ```
 
-### Step 2: Backend Setup
+**2. Environment Variables:**
 
-```bash
-cd Backend
-npm install
+Create `.env` files in each directory:
 
-# Create .env file (copy from .env.example)
-cp .env.example .env
-```
-
-**Edit `Backend/.env` with your credentials:**
 ```env
+# Backend/.env
 PORT=4000
-NODE_ENV=development
-MONGO_URI=mongodb://localhost:27017/musicflow  # Or MongoDB Atlas URI
-JWT_SECRET=<paste-generated-secret>
+MONGODB_URI=your_mongodb_uri
+JWT_SECRET=your_generated_secret
 CLOUDINARY_CLOUD_NAME=your_cloud_name
 CLOUDINARY_API_KEY=your_api_key
 CLOUDINARY_API_SECRET=your_api_secret
-FRONTEND_URL=http://localhost:3000
-ADMIN_URL=http://localhost:5173
-```
 
-**Generate JWT_SECRET:**
-```bash
-node -e "console.log(require('crypto').randomBytes(64).toString('hex'))"
-```
+# Music Web Application/.env
+VITE_API_URL=http://localhost:4000
 
-**Start Backend:**
-```bash
-npm start
-```
-✅ Backend runs on: `http://localhost:4000`
-
-### Step 3: Frontend Setup
-
-```bash
-cd "Music Web Application"
-npm install
-
-# Create .env file
-cp .env.example .env
-```
-
-**Edit `Music Web Application/.env`:**
-```env
+# admin/.env
 VITE_API_URL=http://localhost:4000
 ```
 
-**Start Frontend:**
+**3. Run All Services:**
 ```bash
-npm run dev
-```
-✅ Frontend runs on: `http://localhost:3000`
+# Terminal 1 - Backend
+cd Backend && npm start
 
-### Step 4: Admin Panel Setup
+# Terminal 2 - Frontend
+cd "Music Web Application" && npm run dev
 
-```bash
-cd admin
-npm install
-
-# Create .env file
-cp .env.example .env
+# Terminal 3 - Admin
+cd admin && npm run dev
 ```
 
-**Edit `admin/.env`:**
-```env
-VITE_API_URL=http://localhost:4000
-```
-
-**Start Admin:**
-```bash
-npm run dev
-```
-✅ Admin runs on: `http://localhost:5173`
-
-### Step 5: Verify Installation
-
-1. **Backend Health Check**: `http://localhost:4000/api/health`
-   - Should show: `{ status: "OK", database: "Connected" }`
-
-2. **Frontend**: `http://localhost:3000`
-   - Should display the music app
-
-3. **Admin Panel**: `http://localhost:5173`
-   - Should display admin interface
+**Local URLs:**
+- Backend: `http://localhost:4000`
+- Frontend: `http://localhost:3000`
+- Admin: `http://localhost:5173`
 
 ---
 
@@ -731,78 +679,368 @@ User → Frontend (React) → Backend (Express) → Database (MongoDB)
 
 ---
 
-## 🌐 Deployment Guide
+## 🎓 Mentor Q&A | Important Technical Questions
 
-### Backend Deployment
+> **Purpose:** This section contains comprehensive technical questions that mentors or examiners might ask. Use these to prepare for presentations, interviews, or to deepen your understanding of the project.
 
-#### Option 1: Render (Recommended - Free)
-1. Create account at [render.com](https://render.com)
-2. New → Web Service
-3. Connect GitHub repository
-4. Build Command: `npm install`
-5. Start Command: `npm start`
-6. Add environment variables in dashboard:
-   - `MONGO_URI` → MongoDB Atlas connection string
-   - `JWT_SECRET` → Generated secret
-   - `CLOUDINARY_*` → Your Cloudinary credentials
-   - `FRONTEND_URL` → Your deployed frontend URL
-   - `ADMIN_URL` → Your deployed admin URL
-7. Deploy
+---
 
-#### Option 2: Railway
-1. Create account at [railway.app](https://railway.app)
-2. New Project → Deploy from GitHub
-3. Add environment variables
-4. Deploy automatically
+### 📋 **1. Project Architecture & Overview**
 
-**Backend URL will be:** `https://your-app.onrender.com` or similar
+1. **Why did you choose a three-tier architecture (Frontend, Backend, Admin Panel) instead of a monolithic approach?**
 
-### Frontend Deployment
+2. **Explain the complete request-response flow when a user plays a song, from clicking the play button to hearing audio.**
 
-#### Option 1: Vercel (Recommended)
-1. Create account at [vercel.com](https://vercel.com)
-2. Import project from GitHub
-3. Framework: Vite
-4. Root Directory: `Music Web Application`
-5. Build Command: `npm run build`
-6. Output Directory: `dist`
-7. Environment Variable:
-   - `VITE_API_URL` → Your backend URL
-8. Deploy
+3. **What would happen to your application if Cloudinary goes down? How would you handle this scenario?**
 
-#### Option 2: Netlify
-1. Create account at [netlify.com](https://netlify.com)
-2. Build: `npm run build`
-3. Publish directory: `dist`
-4. Environment Variables:
-   - `VITE_API_URL` → Your backend URL
-5. Deploy
+4. **Why did you separate the Admin Panel as a different React application instead of adding admin routes to the main frontend?**
 
-### Admin Panel Deployment
-Same process as frontend, just deploy the `admin` folder separately
+5. **What are the trade-offs of using MongoDB (NoSQL) versus PostgreSQL (SQL) for a music streaming application?**
 
-### Database Setup (MongoDB Atlas)
-1. Create free cluster at [mongodb.com/atlas](https://mongodb.com/atlas)
-2. Create database user
-3. Whitelist all IPs: `0.0.0.0/0`
-4. Get connection string
-5. Add to backend environment variables
+6. **How does your application handle concurrent users playing different songs simultaneously?**
 
-### Cloudinary Setup
-1. Free tier: 25GB storage
-2. No additional configuration needed
-3. Just add credentials to backend .env
+7. **Walk through the complete data flow from user signup to creating their first playlist.**
 
-### Post-Deployment Testing
+---
 
-1. ✅ **Test Backend API**: Visit `https://your-backend-domain.com/api/health`
-2. ✅ **Test Frontend**: Visit your frontend URL and try all features
-3. ✅ **Test Admin Panel**: Visit your admin URL and try uploading
-4. ✅ **Test Authentication**: Create an account and login
-5. ✅ **Test File Uploads**: Upload a song and album cover
-6. ✅ **Test Playback**: Play songs and verify they work
-7. ✅ **Test Responsive Design**: Check on mobile devices
-8. ✅ **Monitor Console**: Check for any errors in browser console
+### 🎨 **2. Frontend Architecture & State Management**
+
+8. **Why did you use React Context API instead of Redux or Zustand for state management?**
+
+9. **Explain the difference between PlayerContext, AuthContext, and ThemeContext. Why are they separated?**
+
+10. **Your PlayerContext is 1200+ lines. How would you refactor it to improve maintainability?**
+
+11. **How does the music player continue playing when users navigate between different pages?**
+
+12. **Explain the concept of "optimistic updates" in your liked songs feature. What happens if the API call fails?**
+
+13. **Why do you store the JWT token in localStorage instead of httpOnly cookies? What are the security implications?**
+
+14. **How does your application handle stale data when multiple tabs are open?**
+
+15. **What is the purpose of the audioRef in PlayerContext and why use useRef instead of useState?**
+
+16. **How does your search functionality work? Why is it debounced and what would happen without debouncing?**
+
+17. **Explain how the recently played timestamps are calculated ("5m ago", "2h ago"). Where is this logic implemented?**
+
+18. **How do you prevent memory leaks in your React components, especially with audio event listeners?**
+
+---
+
+### 🔧 **3. Backend Architecture & API Design**
+
+19. **Why did you use Express.js v5.1.0 instead of other frameworks like NestJS or Fastify?**
+
+20. **Explain the middleware chain in your Express application. What order are they executed in?**
+
+21. **How does the authenticateToken middleware work? Walk through the token verification process.**
+
+22. **Why do you hash passwords with bcrypt and a salt round of 12? What if you increased it to 15?**
+
+23. **Explain the difference between `.select(false)` on the password field and manually deleting it in toJSON().**
+
+24. **What is the purpose of pre-save hooks in your User model? Give an example.**
+
+25. **How do you prevent timing attacks in your password comparison logic?**
+
+26. **Why did you use JWT tokens with 7-day expiration instead of session-based authentication?**
+
+27. **Explain how file uploads work with Multer and Cloudinary. Why use temporary storage?**
+
+28. **What happens if a song upload fails halfway through? How do you handle cleanup?**
+
+29. **How does your backend ensure that users can only access their own playlists?**
+
+30. **Explain the difference between `authenticateToken` and `optionalAuth` middleware. When would you use each?**
+
+31. **How do you handle CORS in production vs development? Why is it configured differently?**
+
+---
+
+### 🗄️ **4. Database Design & Data Modeling**
+
+32. **Why did you use ObjectId references instead of embedding documents for the playlist-song relationship?**
+
+33. **Explain the trade-offs of storing `likedSongs` as an array in the User model versus a separate LikedSongs collection.**
+
+34. **How does the `recentlyPlayed` array work? What prevents it from growing infinitely?**
+
+35. **Why is the User model's password field set to `select: false`? What problem does this solve?**
+
+36. **How would you optimize database queries if you had 10 million songs?**
+
+37. **Explain database indexing. Which fields in your models should be indexed and why?**
+
+38. **What is the N+1 query problem and does your application have it? How would you solve it?**
+
+39. **How does MongoDB's `.populate()` work in your playlist queries?**
+
+40. **What happens if you delete a song that exists in multiple playlists? How would you handle this?**
+
+41. **Explain the concept of schema validation in Mongoose. How does it prevent bad data?**
+
+42. **How would you implement database migrations if you needed to change the schema in production?**
+
+---
+
+### 🔐 **5. Authentication & Security**
+
+43. **How does your JWT token structure look? What information is stored in the payload?**
+
+44. **What security vulnerabilities existed before you fixed the hardcoded JWT_SECRET fallback?**
+
+45. **Explain CORS. Why did you restrict it to specific origins instead of allowing all (`*`)?**
+
+46. **How do you prevent NoSQL injection in your MongoDB queries?**
+
+47. **What is the difference between authentication and authorization? Give examples from your project.**
+
+48. **How would you implement refresh tokens to improve security?**
+
+49. **Why disable sourcemaps in production? What information could attackers gain from them?**
+
+50. **How do you validate user input on the backend? Show an example.**
+
+51. **What is bcrypt's salt and why is it important for password security?**
+
+52. **How would you implement rate limiting to prevent brute force attacks on login?**
+
+53. **Explain how you protect admin routes. What happens if someone tries to access them without authentication?**
+
+54. **What sensitive data should never be committed to Git? How do you prevent it?**
+
+---
+
+### 🔗 **6. Frontend-Backend Integration**
+
+55. **How does Axios work in your application? Do you use interceptors?**
+
+56. **Explain the complete authentication flow from signup to accessing protected routes.**
+
+57. **How do you handle 401 (Unauthorized) responses in your frontend?**
+
+58. **What happens when a JWT token expires while a user is actively using the app?**
+
+59. **How does the frontend know which user is logged in after a page refresh?**
+
+60. **Explain the flow of adding a song to a playlist from UI click to database update.**
+
+61. **How do you handle loading states while fetching data from the API?**
+
+62. **What error handling strategies did you implement for failed API calls?**
+
+63. **How does the admin panel communicate with the backend differently from the user app?**
+
+64. **Explain how FormData works for file uploads. Why can't you use regular JSON?**
+
+---
+
+### 🚀 **7. Deployment & DevOps**
+
+65. **Why did you choose Vercel for frontend and Render for backend instead of AWS or Azure?**
+
+66. **Explain how environment variables work differently in development vs production.**
+
+67. **What is the difference between `VITE_API_URL` and `process.env.MONGODB_URI`?**
+
+68. **How does Vercel build your React application? What happens during `vite build`?**
+
+69. **What is the cold start problem on Render's free tier? How does it affect users?**
+
+70. **How would you implement CI/CD for automatic deployments?**
+
+71. **What monitoring tools would you add to track errors in production?**
+
+72. **How do you ensure zero-downtime deployments when updating the backend?**
+
+73. **Explain the difference between horizontal and vertical scaling. Which would you use?**
+
+74. **What happens if your MongoDB Atlas cluster reaches its storage limit?**
+
+---
+
+### ⚡ **8. Performance & Optimization**
+
+75. **How does lazy loading improve your application's performance?**
+
+76. **What is code splitting and where is it implemented in your Vite config?**
+
+77. **How does Cloudinary's CDN improve audio file delivery compared to serving from your backend?**
+
+78. **Why use React 19? What new features does it offer over React 18?**
+
+79. **How would you implement infinite scroll for the songs list?**
+
+80. **What is the purpose of `manualChunks` in your Vite build configuration?**
+
+81. **How would you optimize the PlayerContext which has 1200+ lines?**
+
+82. **What caching strategies could you implement to reduce API calls?**
+
+83. **How does TailwindCSS purge unused CSS in production?**
+
+84. **What is tree shaking and how does Vite implement it?**
+
+85. **How would you measure and improve the First Contentful Paint (FCP) time?**
+
+---
+
+### 🐛 **9. Error Handling & Validation**
+
+86. **How do you handle errors in async/await functions throughout your backend?**
+
+87. **What is the purpose of the global error handling middleware in Express?**
+
+88. **How do you differentiate between 4xx client errors and 5xx server errors?**
+
+89. **Explain validation in your User model. What happens if validation fails?**
+
+90. **How do you handle file upload errors (wrong format, file too large, etc.)?**
+
+91. **What happens if MongoDB connection fails during runtime?**
+
+92. **How do you display user-friendly error messages in the frontend?**
+
+93. **What is the difference between try-catch and error boundaries in React?**
+
+94. **How do you log and track errors in production?**
+
+---
+
+### 🎵 **10. Feature-Specific Deep Dive**
+
+95. **How does the shuffle algorithm work in your music player?**
+
+96. **Explain how the seek bar synchronizes with the actual audio playback.**
+
+97. **How do you track recently played songs? Why limit it to the last 5?**
+
+98. **What happens when a user creates a playlist with the same name twice?**
+
+99. **How does the "Start Listening" button decide which song to play first?**
+
+100. **Explain the difference between playing a song from the library vs. from a playlist.**
+
+101. **How does the volume control work? Is it persisted across sessions?**
+
+102. **What is the auto-advance feature and how is it implemented?**
+
+103. **How do you prevent duplicate entries in the recently played list?**
+
+104. **How does the theme toggle work? Where is the theme preference stored?**
+
+---
+
+### 🔮 **11. Design Decisions & Trade-offs**
+
+105. **Why use client-side search instead of implementing it on the backend?**
+
+106. **What are the pros and cons of using Context API vs. Redux in your project?**
+
+107. **Why store user data (liked songs, playlists) in the User model instead of separate collections?**
+
+108. **What are the trade-offs of using Cloudinary instead of AWS S3?**
+
+109. **Why use React Router v7.9.4? What features does it provide?**
+
+110. **Explain the decision to use JavaScript instead of TypeScript.**
+
+111. **What are the advantages of using ES6 modules (`import/export`) vs CommonJS (`require`)?**
+
+112. **Why use Vite instead of Create React App or Webpack?**
+
+---
+
+### 🚀 **12. Scalability & Future Improvements**
+
+113. **How would you handle 1 million concurrent users streaming music?**
+
+114. **What database sharding strategy would you implement for scaling?**
+
+115. **How would you implement a recommendation system ("Songs you might like")?**
+
+116. **What caching layer (Redis, Memcached) would you add and why?**
+
+117. **How would you implement real-time features like "Currently listening" for friends?**
+
+118. **What analytics would you track (play counts, skip rates, etc.) and how?**
+
+119. **How would you implement playlist sharing between users?**
+
+120. **What testing strategy would you implement (unit, integration, e2e)?**
+
+121. **How would you add podcast support to your music streaming platform?**
+
+122. **What microservices architecture would you propose for scaling this application?**
+
+123. **How would you implement a subscription/payment system for premium users?**
+
+124. **What would be your strategy for handling music licensing and copyright?**
+
+---
+
+### 🎯 **13. Conceptual & Problem-Solving**
+
+125. **If the backend takes 2 seconds to respond, how does it affect user experience? How would you solve it?**
+
+126. **How would you implement offline playback for downloaded songs?**
+
+127. **What happens if two users try to delete the same song simultaneously?**
+
+128. **How would you implement a queue system for music playback?**
+
+129. **What would you do if users report songs skipping or buffering?**
+
+130. **How would you implement lyrics display synchronized with audio?**
+
+131. **What strategy would you use for A/B testing new features?**
+
+132. **How would you implement user roles (basic user, premium user, admin)?**
+
+133. **How would you handle a situation where your Cloudinary account gets suspended?**
+
+134. **What would your disaster recovery plan look like?**
+
+---
+
+### 🎓 **14. Meta Questions (About Your Learning)**
+
+135. **What was the most challenging part of building this project?**
+
+136. **What would you do differently if you started this project from scratch?**
+
+137. **What new technology or concept did you learn while building this?**
+
+138. **How long did it take to build this project and how did you manage time?**
+
+139. **What resources (documentation, tutorials, Stack Overflow) helped you the most?**
+
+140. **How did you debug issues during development?**
+
+141. **What part of the project are you most proud of and why?**
+
+142. **If you had one more week, what feature would you add?**
+
+---
+
+### ✅ **How to Use This Q&A Section:**
+
+**For Preparation:**
+1. ✅ **Answer each question out loud** - Practice explaining to an imaginary mentor
+2. ✅ **Write down answers** - Helps solidify understanding
+3. ✅ **Draw diagrams** - Visualize architecture, data flow, authentication flow
+4. ✅ **Identify gaps** - Questions you struggle with need more study
+5. ✅ **Reference your code** - Point to specific files and line numbers
+
+**For Presentation:**
+1. ✅ **Be honest** - It's okay to say "I'd need to research that" but explain your thought process
+2. ✅ **Explain trade-offs** - Most decisions have pros and cons
+3. ✅ **Use examples** - Real scenarios from your project
+4. ✅ **Show understanding** - Explain WHY, not just WHAT
+
+**💡 Pro Tip:** The best answers show understanding of **WHY** you made decisions, not just **WHAT** you built. Always discuss alternatives you considered and reasons for your choices.
 
 ---
 
@@ -839,44 +1077,6 @@ Same process as frontend, just deploy the `admin` folder separately
 - ✅ JWT secret vulnerability fixed
 - ✅ Admin routes secured with authentication
 - ✅ CORS configured for specific origins only
-
----
-
-## 🎤 Mentor Presentation Guide
-
-### 30-Second Elevator Pitch
-*"I built MusicFlow, a full-stack music streaming platform using React, Node.js, MongoDB, and Cloudinary. It features user authentication, personalized playlists, a custom music player, search functionality, and an admin panel for content management. The app handles file uploads, real-time updates, and supports both light and dark themes."*
-
-### Key Features to Demonstrate
-
-1. **Play a Song** - Show player controls, seek bar, volume
-2. **Create a Playlist** - Modal, API call, instant UI update
-3. **Like a Song** - Optimistic update
-4. **Search** - Real-time results
-5. **Theme Toggle** - Dark/light switch
-6. **Recently Played** - Timestamps (5m ago, 2h ago)
-7. **Admin Panel** - Upload song, show it in user app
-8. **Responsive Design** - Resize browser
-
-### Common Mentor Questions & Answers
-
-**Q: How does authentication work?**  
-A: "We use JWT tokens. When users log in, the backend validates credentials and generates a JWT containing their user ID. This token is stored in localStorage and included in all subsequent API requests. The backend verifies it using middleware before granting access to protected routes. Passwords are hashed with bcrypt before storage."
-
-**Q: How do you handle file uploads?**  
-A: "We use Multer to handle multipart form data. Files are temporarily saved to the server, then uploaded to Cloudinary's cloud storage. Cloudinary returns secure URLs which we save to MongoDB. This keeps our server lightweight and leverages Cloudinary's global CDN."
-
-**Q: Explain your state management.**  
-A: "We use React Context API with three contexts: AuthContext for user authentication, PlayerContext for music player state and data, and ThemeContext for UI theme. This eliminates prop drilling and makes state accessible throughout the app."
-
-**Q: How does the music player work?**  
-A: "It uses the HTML5 Audio API. We have a hidden audio element controlled by React refs. When a user plays a song, we set the audio element's src to the Cloudinary URL and call play(). Event listeners handle time updates, song end events, and metadata loading."
-
-**Q: How do you ensure data isolation between users?**  
-A: "Every playlist, liked song, and recently played entry is linked to a user ID extracted from the JWT token. Backend queries always filter by the authenticated user's ID, ensuring users can only access their own data."
-
-**Q: What database design did you use?**  
-A: "MongoDB with four collections: Users, Songs, Albums, and Playlists. We chose MongoDB for its flexible schema, fast reads for browsing songs, and easy horizontal scaling as the user base grows."
 
 ---
 
