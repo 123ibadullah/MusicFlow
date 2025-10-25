@@ -3,7 +3,7 @@ import React, { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import AlbumItem from "./AlbumItem";
 import SongItem from "./SongItem";
-import PlaylistItem from "./PlaylistItem";
+import PlaylistItem from "./playlistItem";
 import SkeletonLoader from "./SkeletonLoader";
 import { usePlayer } from "../context/PlayerContext";
 import { useToast } from "../context/ThemeContext";
