@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const connectDB = async () => {
   try {
     // Remove deprecated options for newer Mongoose versions
-    await mongoose.connect(`${process.env.MONGO_URI}/spotify`);
+    await mongoose.connect(process.env.MONGODB_URI);
     
     console.log("✅ MongoDB connected successfully");
     
