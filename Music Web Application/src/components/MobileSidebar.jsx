@@ -10,7 +10,7 @@ const MobileSidebar = ({ isOpen, onClose }) => {
   const location = useLocation();
   const { setShowPlaylistModal, likedSongs, songsData, albumsData, playlists, recentlyPlayed } = usePlayer();
   const { isDark } = useTheme();
-  const { user, isAuthenticated } = useAuth();
+  const { user, isAuthenticated, logout } = useAuth();
 
   // Only show functional menu items that have data or purpose
   const mainMenu = [
@@ -195,6 +195,12 @@ const MobileSidebar = ({ isOpen, onClose }) => {
                     Member
                   </p>
                 </div>
+                <button
+                  onClick={logout}
+                  className="ml-auto px-3 py-2 text-sm font-semibold rounded-lg bg-red-600 text-white hover:bg-red-700 active:scale-95 transition"
+                >
+                  Logout
+                </button>
               </div>
             ) : (
               <div className="flex items-center space-x-3 p-3 rounded-xl bg-gray-50/80 dark:bg-gray-700/80 backdrop-blur-sm transition-all duration-300">

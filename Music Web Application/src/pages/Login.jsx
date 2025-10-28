@@ -36,7 +36,7 @@ const Login = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
       <div className="w-full max-w-md p-8 bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700">
-        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-gray-100">Welcome back</h2>
+        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-gray-100">Welcome</h2>
         <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">Login to continue to MusicFlow</p>
         <form onSubmit={handleSubmit} className="space-y-4">
           <input className="w-full p-3 rounded-lg bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-700 outline-none" placeholder="Email" value={email} onChange={(e)=>setEmail(e.target.value)} />

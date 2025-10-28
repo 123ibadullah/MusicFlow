@@ -1072,11 +1072,10 @@ const PlayerContextProvider = (props) => {
       // Use `file` property from backend, fallback to `url` or `src` fields
       const src = track.file || track.url || track.src || track.audio;
       if (src) {
-        // If src looks like a relative path from backend, keep as-is
         audioElement.src = src;
         audioElement.load();
         audioElement.volume = volume / 100;
-        audioElement.play().then(() => setPlayStatus(true)).catch(() => setPlayStatus(false));
+        setPlayStatus(false);
       }
     } else {
       audioElement.removeAttribute('src');

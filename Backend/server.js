@@ -7,6 +7,8 @@ import connectCloudinary from "./src/config/cloudinary.js";
 import albumRouter from "./src/routes/albumRouter.js";
 import playlistRouter from "./src/routes/playlistRouter.js";
 import authRouter from "./src/routes/authRoutes.js";
+import path from "path";
+import { fileURLToPath } from "url";
 
 // Import models to ensure they're registered before routes
 import "./src/models/songModel.js";
@@ -70,8 +72,16 @@ app.use("/api/song", songRouter);
 app.use("/api/album", albumRouter);
 app.use("/api/playlist", playlistRouter);
 
-app.get("/", (req, res) => {
-  res.send("API Working");
+// Serve frontend (SPA) from built dist folder
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const frontendDistPath = path.resolve(__dirname, "../Music Web Application/dist");
+
+app.use(express.static(frontendDistPath));
+
+// SPA fallback (after API routes) using regex to exclude /api (Express 5 safe)
+app.get(/^\/(?!api)(.*)/, (req, res) => {
+  res.sendFile(path.join(frontendDistPath, "index.html"));
 });
 
 // Error handling middleware
