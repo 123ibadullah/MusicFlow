@@ -8,6 +8,7 @@ import albumRouter from "./src/routes/albumRouter.js";
 import playlistRouter from "./src/routes/playlistRouter.js";
 import authRouter from "./src/routes/authRoutes.js";
 import path from "path";
+import fs from "fs";
 import { fileURLToPath } from "url";
 
 // Import models to ensure they're registered before routes
@@ -75,14 +76,37 @@ app.use("/api/playlist", playlistRouter);
 // Serve frontend (SPA) from built dist folder
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const frontendDistPath = path.resolve(__dirname, "../Music Web Application/dist");
 
-app.use(express.static(frontendDistPath));
+// Resolve a usable frontend path in this priority order:
+// 1) FRONTEND_DIST env var
+// 2) Backend/client-dist (copied during build)
+// 3) ../Music Web Application/dist (monorepo sibling)
+const CANDIDATE_FRONTEND_PATHS = [
+  process.env.FRONTEND_DIST && path.resolve(process.env.FRONTEND_DIST),
+  path.resolve(__dirname, "client-dist"),
+  path.resolve(__dirname, "../Music Web Application/dist"),
+].filter(Boolean);
 
-// SPA fallback (after API routes) using regex to exclude /api (Express 5 safe)
-app.get(/^\/(?!api)(.*)/, (req, res) => {
-  res.sendFile(path.join(frontendDistPath, "index.html"));
-});
+let resolvedFrontendPath = null;
+for (const p of CANDIDATE_FRONTEND_PATHS) {
+  try {
+    if (fs.existsSync(p) && fs.existsSync(path.join(p, "index.html"))) {
+      resolvedFrontendPath = p;
+      break;
+    }
+  } catch {}
+}
+
+if (resolvedFrontendPath) {
+  console.log("🗂️ Serving static frontend from:", resolvedFrontendPath);
+  app.use(express.static(resolvedFrontendPath));
+  // SPA fallback (after API routes) using regex to exclude /api (Express 5 safe)
+  app.get(/^\/(?!api)(.*)/, (req, res) => {
+    res.sendFile(path.join(resolvedFrontendPath, "index.html"));
+  });
+} else {
+  console.warn("⚠️ Frontend build not found. Set FRONTEND_DIST or run backend build script to copy client build.");
+}
 
 // Error handling middleware
 app.use((err, req, res, next) => {
