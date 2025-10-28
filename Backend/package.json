@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
     "server": "nodemon server.js",
-    "build:client": "node -e \"const fs=require('fs');const path=require('path');const src=path.resolve('..','Music Web Application','dist');const dst=path.resolve('Backend','client-dist');if(fs.existsSync(src)){fs.rmSync(dst,{recursive:true,force:true});fs.mkdirSync(dst,{recursive:true});fs.cpSync(src,dst,{recursive:true});console.log('Copied frontend dist to',dst);}else{console.warn('Frontend dist not found at',src);}\""
+    "build:client": "node -e \"const fs=require('fs');const path=require('path');const src=path.resolve('..','MusicWebApp','dist');const dst=path.resolve('Backend','client-dist');if(fs.existsSync(src)){fs.rmSync(dst,{recursive:true,force:true});fs.mkdirSync(dst,{recursive:true});fs.cpSync(src,dst,{recursive:true});console.log('✅ Copied frontend dist to',dst);}else{console.warn('⚠️ Frontend dist not found at',src);}\""
   },
   "author": "",
   "license": "ISC",
