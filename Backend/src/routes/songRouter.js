@@ -10,12 +10,14 @@ import {
   getRecentlyPlayed
 } from "../controllers/songController.js";
 import upload from "../middleware/multer.js";
-import { authenticateToken } from "../middleware/authMiddleware.js";
+import { authenticateToken, authorizeAdmin } from "../middleware/authMiddleware.js";
 
 const songRouter = express.Router();
 
 songRouter.post(
   "/add",
+  authenticateToken,
+  authorizeAdmin,
   upload.fields([
     { name: "image", maxCount: 1 },
     { name: "audio", maxCount: 1 },
@@ -23,7 +25,7 @@ songRouter.post(
   addSong
 );
 songRouter.get("/list", listSong);
-songRouter.post("/remove", removeSong);
+songRouter.post("/remove", authenticateToken, authorizeAdmin, removeSong);
 songRouter.post("/like", authenticateToken, likeSong);
 songRouter.post("/unlike", authenticateToken, unlikeSong);
 songRouter.get("/liked", authenticateToken, getLikedSongs);

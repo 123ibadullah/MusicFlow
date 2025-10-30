@@ -39,9 +39,20 @@ const Login = () => {
         <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-gray-100">Welcome</h2>
         <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">Login to continue to MusicFlow</p>
         <form onSubmit={handleSubmit} className="space-y-4">
-          <input className="w-full p-3 rounded-lg bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-700 outline-none" placeholder="Email" value={email} onChange={(e)=>setEmail(e.target.value)} />
-          <input type="password" className="w-full p-3 rounded-lg bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-700 outline-none" placeholder="Password" value={password} onChange={(e)=>setPassword(e.target.value)} />
-          <button disabled={loading} className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold">{loading ? 'Signing in...' : 'Sign In'}</button>
+          <input 
+            className="w-full p-3 rounded-lg bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-700 outline-none text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400" 
+            placeholder="Email" 
+            value={email} 
+            onChange={(e)=>setEmail(e.target.value)} 
+          />
+          <input 
+            type="password" 
+            className="w-full p-3 rounded-lg bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-700 outline-none text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400" 
+            placeholder="Password" 
+            value={password} 
+            onChange={(e)=>setPassword(e.target.value)} 
+          />
+          <button disabled={loading} className="w-full py-3 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed text-white rounded-lg font-semibold transition-colors">{loading ? 'Signing in...' : 'Sign In'}</button>
         </form>
         <p className="text-sm text-gray-500 dark:text-gray-400 mt-4">Don't have an account? <Link to="/signup" className="text-blue-600">Create one</Link></p>
       </div>

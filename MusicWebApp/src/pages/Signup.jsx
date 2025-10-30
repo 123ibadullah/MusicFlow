@@ -41,7 +41,7 @@ const Signup = () => {
         <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">Sign up to save your likes and playlists in your account</p>
         <form onSubmit={handleSubmit} className="space-y-4">
           <input 
-            className="w-full p-3 rounded-lg bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-700 outline-none" 
+            className="w-full p-3 rounded-lg bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-700 outline-none text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400" 
             placeholder="Full name" 
             value={name} 
             onChange={(e)=>setName(e.target.value)}
@@ -50,7 +50,7 @@ const Signup = () => {
             required
           />
           <input 
-            className="w-full p-3 rounded-lg bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-700 outline-none" 
+            className="w-full p-3 rounded-lg bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-700 outline-none text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400" 
             placeholder="Email" 
             type="email"
             value={email} 
@@ -59,14 +59,14 @@ const Signup = () => {
           />
           <input 
             type="password" 
-            className="w-full p-3 rounded-lg bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-700 outline-none" 
+            className="w-full p-3 rounded-lg bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-700 outline-none text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400" 
             placeholder="Password (min 6 characters)" 
             value={password} 
             onChange={(e)=>setPassword(e.target.value)}
             minLength="6"
             required
           />
-          <button disabled={loading} className="w-full py-3 bg-green-600 hover:bg-green-700 text-white rounded-lg font-semibold">{loading ? 'Creating...' : 'Create account'}</button>
+          <button disabled={loading} className="w-full py-3 bg-green-600 hover:bg-green-700 disabled:bg-gray-400 disabled:cursor-not-allowed text-white rounded-lg font-semibold transition-colors">{loading ? 'Creating...' : 'Create account'}</button>
         </form>
         <p className="text-sm text-gray-500 dark:text-gray-400 mt-4">Already have an account? <Link to="/login" className="text-blue-600">Sign in</Link></p>
       </div>

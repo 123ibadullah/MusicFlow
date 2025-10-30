@@ -69,6 +69,8 @@ const AddAlbum = () => {
     setUploadStage("Starting upload...");
 
     try {
+      const token = localStorage.getItem('auth_token');
+      
       const formData = new FormData();
       formData.append("image", image);
       formData.append("name", name.trim());
@@ -81,6 +83,7 @@ const AddAlbum = () => {
       const response = await axios.post(`${url}/api/album/add`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
+          'Authorization': `Bearer ${token}`
         },
         onUploadProgress: (progressEvent) => {
           const progress = (progressEvent.loaded / progressEvent.total) * 100;

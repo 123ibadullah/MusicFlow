@@ -1,11 +1,15 @@
-import User from '../models/userModel.js';
-import jwt from 'jsonwebtoken';
+import User from "../models/userModel.js";
+import jwt from "jsonwebtoken";
 
 // Generate JWT Token
-const generateToken = (userId) => {
-  return jwt.sign({ userId }, process.env.JWT_SECRET || 'your-secret-key', {
-    expiresIn: '7d'
-  });
+const generateToken = (userId, role) => {
+  return jwt.sign(
+    { userId, role },
+    process.env.JWT_SECRET || "your-secret-key",
+    {
+      expiresIn: "7d",
+    }
+  );
 };
 
 // Register User
@@ -17,7 +21,7 @@ const registerUser = async (req, res) => {
     if (!name || !email || !password) {
       return res.status(400).json({
         success: false,
-        message: 'Please provide all required fields'
+        message: "Please provide all required fields",
       });
     }
 
@@ -26,7 +30,7 @@ const registerUser = async (req, res) => {
     if (existingUser) {
       return res.status(400).json({
         success: false,
-        message: 'User already exists with this email'
+        message: "User already exists with this email",
       });
     }
 
@@ -34,54 +38,57 @@ const registerUser = async (req, res) => {
     const user = await User.create({
       name,
       email,
-      password
+      password,
     });
 
     // Generate token
-    const token = generateToken(user._id);
+    const token = generateToken(user._id, user.role);
 
     res.status(201).json({
       success: true,
-      message: 'User registered successfully',
+      message: "User registered successfully",
       data: {
         user: {
           id: user._id,
           name: user.name,
           email: user.email,
           avatar: user.avatar,
+          role: user.role,
           likedSongs: user.likedSongs,
           recentlyPlayed: user.recentlyPlayed,
-          playlists: user.playlists
+          playlists: user.playlists,
         },
-        token
-      }
+        token,
+      },
     });
-
   } catch (error) {
-    console.error('Registration error:', error);
-    
+    console.error("Registration error:", error);
+
     // Handle validation errors
-    if (error.name === 'ValidationError') {
-      const errors = Object.values(error.errors).map(err => err.message);
+    if (error.name === "ValidationError") {
+      const errors = Object.values(error.errors).map((err) => err.message);
       return res.status(400).json({
         success: false,
-        message: 'Validation failed',
-        errors: errors
+        message: "Validation failed",
+        errors: errors,
       });
     }
-    
+
     // Handle duplicate email error
     if (error.code === 11000) {
       return res.status(400).json({
         success: false,
-        message: 'Email already exists'
+        message: "Email already exists",
       });
     }
-    
+
     res.status(500).json({
       success: false,
-      message: 'Internal server error',
-      error: process.env.NODE_ENV === 'development' ? error.message : 'Something went wrong'
+      message: "Internal server error",
+      error:
+        process.env.NODE_ENV === "development"
+          ? error.message
+          : "Something went wrong",
     });
   }
 };
@@ -95,16 +102,16 @@ const loginUser = async (req, res) => {
     if (!email || !password) {
       return res.status(400).json({
         success: false,
-        message: 'Please provide email and password'
+        message: "Please provide email and password",
       });
     }
 
     // Find user and include password
-    const user = await User.findOne({ email }).select('+password');
+    const user = await User.findOne({ email }).select("+password");
     if (!user) {
       return res.status(401).json({
         success: false,
-        message: 'Invalid email or password'
+        message: "Invalid email or password",
       });
     }
 
@@ -112,7 +119,7 @@ const loginUser = async (req, res) => {
     if (!user.isActive) {
       return res.status(401).json({
         success: false,
-        message: 'Account is deactivated'
+        message: "Account is deactivated",
       });
     }
 
@@ -121,7 +128,7 @@ const loginUser = async (req, res) => {
     if (!isPasswordValid) {
       return res.status(401).json({
         success: false,
-        message: 'Invalid email or password'
+        message: "Invalid email or password",
       });
     }
 
@@ -129,43 +136,46 @@ const loginUser = async (req, res) => {
     await user.updateLastLogin();
 
     // Generate token
-    const token = generateToken(user._id);
+    const token = generateToken(user._id, user.role);
 
     res.status(200).json({
       success: true,
-      message: 'Login successful',
+      message: "Login successful",
       data: {
         user: {
           id: user._id,
           name: user.name,
           email: user.email,
           avatar: user.avatar,
+          role: user.role,
           likedSongs: user.likedSongs,
           recentlyPlayed: user.recentlyPlayed,
           playlists: user.playlists,
-          lastLogin: user.lastLogin
+          lastLogin: user.lastLogin,
         },
-        token
-      }
+        token,
+      },
     });
-
   } catch (error) {
-    console.error('Login error:', error);
-    
+    console.error("Login error:", error);
+
     // Handle validation errors
-    if (error.name === 'ValidationError') {
-      const errors = Object.values(error.errors).map(err => err.message);
+    if (error.name === "ValidationError") {
+      const errors = Object.values(error.errors).map((err) => err.message);
       return res.status(400).json({
         success: false,
-        message: 'Validation failed',
-        errors: errors
+        message: "Validation failed",
+        errors: errors,
       });
     }
-    
+
     res.status(500).json({
       success: false,
-      message: 'Internal server error',
-      error: process.env.NODE_ENV === 'development' ? error.message : 'Something went wrong'
+      message: "Internal server error",
+      error:
+        process.env.NODE_ENV === "development"
+          ? error.message
+          : "Something went wrong",
     });
   }
 };
@@ -174,14 +184,14 @@ const loginUser = async (req, res) => {
 const getUserProfile = async (req, res) => {
   try {
     const user = await User.findById(req.user.userId)
-      .populate('likedSongs')
-      .populate('playlists')
-      .populate('recentlyPlayed.song');
+      .populate("likedSongs")
+      .populate("playlists")
+      .populate("recentlyPlayed.song");
 
     if (!user) {
       return res.status(404).json({
         success: false,
-        message: 'User not found'
+        message: "User not found",
       });
     }
 
@@ -193,21 +203,21 @@ const getUserProfile = async (req, res) => {
           name: user.name,
           email: user.email,
           avatar: user.avatar,
+          role: user.role,
           likedSongs: user.likedSongs,
           recentlyPlayed: user.recentlyPlayed,
           playlists: user.playlists,
           lastLogin: user.lastLogin,
-          createdAt: user.createdAt
-        }
-      }
+          createdAt: user.createdAt,
+        },
+      },
     });
-
   } catch (error) {
-    console.error('Get profile error:', error);
+    console.error("Get profile error:", error);
     res.status(500).json({
       success: false,
-      message: 'Internal server error',
-      error: error.message
+      message: "Internal server error",
+      error: error.message,
     });
   }
 };
@@ -218,38 +228,39 @@ const updateUserProfile = async (req, res) => {
     const { name, avatar } = req.body;
     const userId = req.user.userId;
 
+    // Fetch the original user so we always preserve their current role
+    const existingUser = await User.findById(userId);
+    if (!existingUser) {
+      return res.status(404).json({ success: false, message: "User not found" });
+    }
+    const updateFields = { name, avatar, role: existingUser.role };
     const user = await User.findByIdAndUpdate(
       userId,
-      { name, avatar },
+      updateFields,
       { new: true, runValidators: true }
     );
-
     if (!user) {
-      return res.status(404).json({
-        success: false,
-        message: 'User not found'
-      });
+      return res.status(404).json({ success: false, message: "User not found" });
     }
-
     res.status(200).json({
       success: true,
-      message: 'Profile updated successfully',
+      message: "Profile updated successfully",
       data: {
         user: {
           id: user._id,
           name: user.name,
           email: user.email,
-          avatar: user.avatar
-        }
-      }
+          avatar: user.avatar,
+          role: user.role,
+        },
+      },
     });
-
   } catch (error) {
-    console.error('Update profile error:', error);
+    console.error("Update profile error:", error);
     res.status(500).json({
       success: false,
-      message: 'Internal server error',
-      error: error.message
+      message: "Internal server error",
+      error: error.message,
     });
   }
 };
@@ -261,11 +272,11 @@ const changePassword = async (req, res) => {
     const userId = req.user.userId;
 
     // Find user with password
-    const user = await User.findById(userId).select('+password');
+    const user = await User.findById(userId).select("+password");
     if (!user) {
       return res.status(404).json({
         success: false,
-        message: 'User not found'
+        message: "User not found",
       });
     }
 
@@ -274,7 +285,7 @@ const changePassword = async (req, res) => {
     if (!isCurrentPasswordValid) {
       return res.status(400).json({
         success: false,
-        message: 'Current password is incorrect'
+        message: "Current password is incorrect",
       });
     }
 
@@ -284,15 +295,14 @@ const changePassword = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      message: 'Password changed successfully'
+      message: "Password changed successfully",
     });
-
   } catch (error) {
-    console.error('Change password error:', error);
+    console.error("Change password error:", error);
     res.status(500).json({
       success: false,
-      message: 'Internal server error',
-      error: error.message
+      message: "Internal server error",
+      error: error.message,
     });
   }
 };
@@ -307,15 +317,14 @@ const deleteUserAccount = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      message: 'Account deleted successfully'
+      message: "Account deleted successfully",
     });
-
   } catch (error) {
-    console.error('Delete account error:', error);
+    console.error("Delete account error:", error);
     res.status(500).json({
       success: false,
-      message: 'Internal server error',
-      error: error.message
+      message: "Internal server error",
+      error: error.message,
     });
   }
 };
@@ -326,5 +335,5 @@ export {
   getUserProfile,
   updateUserProfile,
   changePassword,
-  deleteUserAccount
+  deleteUserAccount,
 };

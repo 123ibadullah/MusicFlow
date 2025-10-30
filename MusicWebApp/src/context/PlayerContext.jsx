@@ -113,39 +113,45 @@ const PlayerContextProvider = (props) => {
   const getSafeRecentlyPlayed = () =>
     Array.isArray(recentlyPlayed) ? recentlyPlayed : [];
 
-  // Load data from localStorage - only if not authenticated (use backend data when logged in)
+  // Load data from localStorage on mount (for both authenticated and non-authenticated users)
   useEffect(() => {
-    if (!isAuthenticated) {
-      try {
-        const savedLikedSongs = localStorage.getItem("likedSongs");
-        const savedRecentlyPlayed = localStorage.getItem("recentlyPlayed");
-        const savedVolume = localStorage.getItem("volume");
+    try {
+      const savedLikedSongs = localStorage.getItem("likedSongs");
+      const savedRecentlyPlayed = localStorage.getItem("recentlyPlayed");
+      const savedVolume = localStorage.getItem("volume");
 
+      // Only load from localStorage if backend hasn't loaded data yet (for authenticated users)
+      // For non-authenticated users, always load from localStorage
+      if (!isAuthenticated) {
         if (savedLikedSongs) setLikedSongs(JSON.parse(savedLikedSongs));
-        if (savedRecentlyPlayed)
-          setRecentlyPlayed(JSON.parse(savedRecentlyPlayed));
-        if (savedVolume) setVolume(parseInt(savedVolume));
-      } catch (error) {
-        console.error("Error loading from localStorage:", error);
+        if (savedRecentlyPlayed) setRecentlyPlayed(JSON.parse(savedRecentlyPlayed));
       }
+      if (savedVolume) setVolume(parseInt(savedVolume));
+    } catch (error) {
+      console.error("Error loading from localStorage:", error);
     }
-  }, [isAuthenticated]);
+  }, []); // Only run on mount
 
-  // Save to localStorage - only for non-authenticated users
+  // Save to localStorage - for both authenticated and non-authenticated users
   useEffect(() => {
-    if (!isAuthenticated) {
-      localStorage.setItem("likedSongs", JSON.stringify(getSafeLikedSongs()));
+    try {
+      const likedSongsToSave = Array.isArray(likedSongs) ? likedSongs : [];
+      localStorage.setItem("likedSongs", JSON.stringify(likedSongsToSave));
+      console.log("💾 Saved liked songs to localStorage:", likedSongsToSave.length);
+    } catch (error) {
+      console.error("Error saving liked songs to localStorage:", error);
     }
-  }, [likedSongs, isAuthenticated]);
+  }, [likedSongs]);
 
   useEffect(() => {
-    if (!isAuthenticated) {
-      localStorage.setItem(
-        "recentlyPlayed",
-        JSON.stringify(getSafeRecentlyPlayed())
-      );
+    try {
+      const recentlyPlayedToSave = Array.isArray(recentlyPlayed) ? recentlyPlayed : [];
+      localStorage.setItem("recentlyPlayed", JSON.stringify(recentlyPlayedToSave));
+      console.log("💾 Saved recently played to localStorage:", recentlyPlayedToSave.length);
+    } catch (error) {
+      console.error("Error saving recently played to localStorage:", error);
     }
-  }, [recentlyPlayed, isAuthenticated]);
+  }, [recentlyPlayed]);
 
   useEffect(() => {
     localStorage.setItem("volume", volume.toString());

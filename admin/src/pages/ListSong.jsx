@@ -35,7 +35,12 @@ const ListSong = () => {
     }
 
     try {
-      const response = await axios.post(`${url}/api/song/remove`, { id });
+      const token = localStorage.getItem('auth_token');
+      const response = await axios.post(`${url}/api/song/remove`, { id }, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
       if (response.data.success) {
         toast.success("Song deleted successfully");
         await fetchSongs();
@@ -43,7 +48,8 @@ const ListSong = () => {
         toast.error(response.data.message || "Failed to delete song");
       }
     } catch (error) {
-      toast.error("Error deleting song");
+      const message = error.response?.data?.message || "Error deleting song";
+      toast.error(message);
     }
   };
 

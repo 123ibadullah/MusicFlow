@@ -36,7 +36,12 @@ const ListAlbum = () => {
     }
 
     try {
-      const response = await axios.post(`${url}/api/album/remove`, { id });
+      const token = localStorage.getItem('auth_token');
+      const response = await axios.post(`${url}/api/album/remove`, { id }, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
       if (response.data.success) {
         toast.success("Album deleted successfully");
         await fetchAlbums();
@@ -44,7 +49,8 @@ const ListAlbum = () => {
         toast.error(response.data.message || "Failed to delete album");
       }
     } catch (error) {
-      toast.error("Error deleting album");
+      const message = error.response?.data?.message || "Error deleting album";
+      toast.error(message);
     }
   };
 

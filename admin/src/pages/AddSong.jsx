@@ -99,6 +99,8 @@ const AddSong = () => {
     setUploadStage("Preparing files...");
 
     try {
+      const token = localStorage.getItem('auth_token');
+      
       const formData = new FormData();
       formData.append("image", image);
       formData.append("audio", song);
@@ -112,6 +114,7 @@ const AddSong = () => {
       const response = await axios.post(`${url}/api/song/add`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
+          'Authorization': `Bearer ${token}`
         },
         onUploadProgress: (progressEvent) => {
           if (progressEvent.total) {
