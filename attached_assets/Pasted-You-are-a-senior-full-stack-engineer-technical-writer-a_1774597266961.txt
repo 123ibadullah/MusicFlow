@@ -1,0 +1,160 @@
+You are a senior full-stack engineer, technical writer, and interviewer.
+
+I have a MERN stack project called MusicFlow.
+
+Your task is to generate ONE COMPLETE MASTER MARKDOWN FILE that fully explains the project and makes a student interview-ready.
+
+---
+
+# 🎯 GOAL
+
+Create:
+👉 PROJECT_MASTER.md
+
+This file must:
+
+* Fully explain the entire project
+* Be enough to understand the project WITHOUT reading code
+* Help me confidently answer interview questions
+* Cover all important technical and practical aspects
+
+---
+
+# ⚠️ IMPORTANT RULES
+
+* DO NOT fix code
+* DO NOT audit the project
+* DO NOT suggest changes
+* ONLY generate the markdown file
+
+Before writing, internally think through the project deeply to ensure nothing important is missed.
+
+---
+
+# 📋 CONTENT (INCLUDE ALL)
+
+## 1. Project Overview
+
+* Name
+* Short description
+
+## 2. Problem Statement
+
+* Real-world problem
+* Why it matters
+
+## 3. Solution
+
+* What was built
+* How it solves the problem
+
+## 4. Features
+
+* Clean bullet points
+
+## 5. Tech Stack (WITH WHY)
+
+* Frontend, Backend, DB, Tools
+* Explain why each was chosen
+
+## 6. Complete End-to-End Working Flow ⭐⭐⭐
+
+Explain step-by-step:
+User → Frontend → API → Backend → DB → Response → UI
+
+## 7. System Architecture
+
+* Simple explanation (no complex jargon)
+
+## 8. Database Design
+
+* Models (User, Song, Playlist, etc.)
+* Key fields
+* Why designed this way
+
+## 9. API Design
+
+* Important endpoints
+* What each does
+
+## 10. Core Logic Deep Dive ⭐⭐⭐
+
+Explain clearly:
+
+* Music player working
+* Recommendation logic
+* Trending logic
+* Playlist system
+* Like/unlike system
+* Recently played system
+
+## 11. Performance & Optimization
+
+* Redis caching
+* Query efficiency
+* Rendering optimization
+
+## 12. Security
+
+* JWT
+* Password hashing
+* Protected routes
+
+## 13. Edge Cases & Testing
+
+* Backend down
+* Redis down
+* Empty data
+* Multiple users
+* Error handling
+
+## 14. Limitations
+
+* Honest limitations
+
+## 15. Tradeoffs
+
+* Why simpler approach used
+* Why Redis optional
+* Why no ML (if applicable)
+
+## 16. Challenges Faced
+
+* Real problems during development
+
+## 17. Future Improvements
+
+* Practical upgrades
+
+## 18. How to Run
+
+* Setup steps
+
+## 19. Interview Ready Section ⭐⭐⭐
+
+Include direct answers:
+
+* Explain this project (2-minute answer)
+* Why this project?
+* Why MERN stack?
+* Biggest challenge?
+* What did you learn?
+* What would you improve?
+
+---
+
+# 🧠 STYLE
+
+* Use simple, natural English
+* Make it easy to speak in interview
+* Avoid AI-like wording
+* Keep explanations practical and clear
+
+---
+
+# 🚀 FINAL OUTPUT
+
+Return ONLY:
+👉 PROJECT_MASTER.md
+
+No extra explanation outside the file.
