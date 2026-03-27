@@ -51,11 +51,14 @@ MusicFlow is a full-stack music streaming platform built with the MERN stack (Mo
 - `start-backend.sh` - Startup script (MongoDB + backend)
 
 ## Code Quality Notes
-- No debug artifacts: all `console.log` debug statements removed from frontend and backend controllers; only `console.error` for genuine errors remains
+- No debug artifacts: all `console.log` debug statements removed from frontend, backend controllers, and server.js socket handlers; only `console.error`/`console.warn` for genuine errors/warnings remain
+- Startup and operational logs kept in config files (mongodb.js, cloudinary.js, redis.js) and server.js startup
 - No skeleton flash on play: `SongItem.jsx` plays immediately without a 500ms loading skeleton
 - Auth uses `token` key in localStorage (not `auth_token`)
 - All sidebar navigation items always visible (no data-count guards on mobile or desktop)
 - `cleanupOldPlaylists` endpoint protected by `authenticateToken` + `authorizeAdmin` middleware
+- Test files removed: `TestUpload.jsx` (admin), `/api/test-upload` endpoint (server.js)
+- Unused files removed: `Search.jsx` (orphaned component), `src/components/assets/` folder (PNG/JPG/MP3/SVG files not used by any component)
 
 ## Deployment
 - Target: VM (always-on, WebSockets require persistent connection)
