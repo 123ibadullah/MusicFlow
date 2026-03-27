@@ -41,9 +41,21 @@ MusicFlow is a full-stack music streaming platform built with the MERN stack (Mo
 - `Backend/server.js` - Express server entry point (loads env from `../.env`)
 - `Backend/src/config/mongodb.js` - MongoDB connection
 - `Backend/src/config/redis.js` - Redis connection (graceful fallback)
+- `Backend/src/controllers/playlistController.js` - Playlist CRUD + AI generation
+- `Backend/src/routes/playlistRouter.js` - Playlist routes (cleanup endpoint requires admin auth)
 - `MusicWebApp/src/context/PlayerContext.jsx` - Music player state
-- `MusicWebApp/src/context/AuthContext.jsx` - Authentication state
+- `MusicWebApp/src/context/AuthContext.jsx` - Authentication state (token key: `token`)
+- `MusicWebApp/src/components/Sidebar.jsx` - Desktop sidebar navigation
+- `MusicWebApp/src/components/MobileSidebar.jsx` - Mobile sidebar navigation
+- `MusicWebApp/src/components/SongItem.jsx` - Song card component
 - `start-backend.sh` - Startup script (MongoDB + backend)
+
+## Code Quality Notes
+- No debug artifacts: all `console.log` debug statements removed from frontend and backend controllers; only `console.error` for genuine errors remains
+- No skeleton flash on play: `SongItem.jsx` plays immediately without a 500ms loading skeleton
+- Auth uses `token` key in localStorage (not `auth_token`)
+- All sidebar navigation items always visible (no data-count guards on mobile or desktop)
+- `cleanupOldPlaylists` endpoint protected by `authenticateToken` + `authorizeAdmin` middleware
 
 ## Deployment
 - Target: VM (always-on, WebSockets require persistent connection)
