@@ -98,3 +98,7 @@ externalPort = 80
 deploymentTarget = "vm"
 run = ["bash", "start-backend.sh"]
 build = ["bash", "-c", "cd MusicWebApp && npm run build && mkdir -p Backend/client-dist && cp -r MusicWebApp/dist/* Backend/client-dist/"]
+
+[postMerge]
+path = "scripts/post-merge.sh"
+timeoutMs = 120000
